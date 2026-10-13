@@ -17,8 +17,16 @@ export const config = {
     startISO: '2026-12-06T11:00:00+05:30',
     endISO: '2026-12-06T17:00:00+05:30',
     venue: 'Royal Pepper Resorts',
+    /** Hall within the venue — shown softly under the venue on the details card ('' = hidden) */
+    hall: 'Majestic Hall',
     mapsUrl: 'https://maps.app.goo.gl/r9jxGu99wenfUFJZ7',
     dressCode: 'Suits, Gowns & Good Vibes',
+    /** Order of the day, shown quietly inside The Engagement card (empty list = hidden) */
+    timeline: [
+      { time: '11:30 AM – 1:00 PM', label: 'Tilak, followed by Lagan' },
+      { time: '1:00 – 2:30 PM', label: 'Lunch' },
+      { time: '2:30 – 4:00 PM', label: 'Ring Ceremony' },
+    ],
   },
 
   envelope: {
@@ -30,15 +38,15 @@ export const config = {
   /** Host line on the details page (chosen by Pranshu). */
   host: {
     blessing: 'By the grace of God',
-    parents: 'Mr. Harish Kumar Sharma & Mrs. Renu Sharma',
+    parents: 'Mrs. Renu & Mr. Harish Kumar Sharma',
     invite: 'joyfully invite you to an afternoon honouring the engagement of their son',
-    joiner: 'to',
+    joiner: 'with',
   },
 
   rsvp: {
     welcome: 'Dearest Family and Friends,',
     message:
-      'We would be delighted to have you with us as Pranshu & Nishtha exchange rings. Kindly let us know if you will be joining us.',
+      'We would be delighted to have you with us as Pranshu & Nishtha exchange rings.',
     contacts: [
       { name: 'Priya', phone: '+91 73874 24280' },
       { name: 'Gaurav', phone: '+91 99990 40244' },
@@ -53,6 +61,6 @@ export const config = {
   share: {
     title: 'Pranshu & Nishtha · Engagement · 6 December 2026',
     description: 'You are invited to the engagement of Pranshu & Nishtha — Sunday, 6th December 2026, 11 AM to 5 PM, Royal Pepper Resorts.',
-    themeColor: '#6a1229',
+    themeColor: '#e4c3bb',
   },
 };

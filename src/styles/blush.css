@@ -1,0 +1,382 @@
+/* =========================================================
+   BLUSH & PEARL — inspired by the embroidered phone invite
+   powder-blush linen, ivory drapes with pearl trim, dusty-rose
+   roses, lavender wisteria, soft gold lines, charcoal type.
+   Loaded last: overrides engagement.css + heritage.css.
+   Layout and structure are unchanged.
+   ========================================================= */
+:root {
+  --blush: #e4c3bb;
+  --blush-deep: #d4ada3;
+  --ivory-card: #f6efe9;
+  --sage: #6b7757;
+  --sage-deep: #4f5843;
+  --dusty: #9b5268;
+  --dusty-deep: #6e3044;
+  --lavender: #7a5a9e;
+  --sgold: #a97f3c;
+  --sgold-deep: #6e501c;
+  --pearl: #f3ece4;
+  --charcoal: #3b3536;
+  --charcoal-soft: #5a5052;
+  --ink: var(--charcoal);
+  --display: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --script: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --label: 'Cinzel', 'Prata', Georgia, serif;
+  --warm-shadow: 107, 79, 74;
+  --linen-weave:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.2) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(120, 80, 75, 0.04) 0 1px, transparent 1px 4px);
+}
+
+body {
+  color: var(--charcoal);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 252, 250, 0.7), transparent 60%),
+    var(--linen-noise) 0 0 / 160px 160px,
+    var(--linen-weave),
+    linear-gradient(180deg, #ebd0c8, #dcb6ac);
+}
+.script { font-family: var(--script); font-weight: 500; }
+.eyebrow { font-family: var(--label); font-weight: 600; letter-spacing: 0.2em; color: var(--sgold-deep); }
+.orn, .tile .orn { color: var(--sgold); }
+:focus-visible { outline-color: var(--dusty-deep); }
+
+/* ---------------- lace & pearl side rails ---------------- */
+.page-border,
+.page-border--l,
+.page-border--r {
+  background: var(--rail-lace-thin) left top / 14px 24px repeat-y;
+  box-shadow: 4px 0 10px -3px rgba(var(--warm-shadow), 0.3);
+}
+@media (min-width: 1100px) {
+  .page-border { background: var(--rail-lace) left top / 100% auto repeat-y; }
+}
+
+/* =========================================================
+   ENVELOPE SCREEN — blush linen, pearl-dotted gold frame,
+   sage linen envelope with an ivory pocket, blush label seal
+   ========================================================= */
+.envelope__bg {
+  background:
+    radial-gradient(ellipse at 50% 44%, rgba(255, 251, 248, 0.9), rgba(240, 228, 223, 0.4) 55%, transparent 80%),
+    var(--linen-noise) 0 0 / 160px 160px,
+    var(--linen-weave),
+    linear-gradient(#ebd0c8, #d9b3a9);
+}
+.envelope__bg::before {
+  border: 1px solid var(--sgold);
+  outline: 2.5px dotted #fbf7f2;
+  outline-offset: -8px;
+  background: var(--bc-tl) left 4px top 4px / 52px no-repeat, var(--bc-tr) right 4px top 4px / 52px no-repeat,
+    var(--bc-bl) left 4px bottom 4px / 52px no-repeat, var(--bc-br) right 4px bottom 4px / 52px no-repeat;
+}
+.lotus--env { display: none; }
+.gold-dust i { background: #fffaf4; box-shadow: 0 0 8px 2px rgba(255, 245, 235, 0.9); }
+.envelope__eyebrow { color: var(--sgold-deep); }
+.envelope__names { font-weight: 500; color: var(--charcoal); font-size: clamp(2.2rem, 9.4vw, 3.8rem); letter-spacing: 0.01em; }
+.envelope__names .amp { font-style: italic; color: var(--dusty); }
+.envelope__line { color: var(--charcoal-soft); }
+.envelope__hint { color: var(--sgold-deep); }
+
+.env { filter: drop-shadow(0 4px 4px rgba(var(--warm-shadow), 0.2)) drop-shadow(0 20px 26px rgba(var(--warm-shadow), 0.24)); }
+.env__back {
+  background: var(--linen-noise) 0 0 / 120px 120px, var(--linen-weave), linear-gradient(#76825f, #5d684b);
+  box-shadow: 0 46px 70px -26px rgba(var(--warm-shadow), 0.5), inset 0 0 0 1.5px var(--sgold), inset 0 2px 0 rgba(255, 255, 255, 0.25);
+}
+.env__letter {
+  background: var(--linen-weave), linear-gradient(#fbf4f1, #f2e4e0);
+  color: var(--charcoal);
+  box-shadow: inset 0 0 0 1px var(--sgold), inset 0 0 0 5px #fbf4f1, inset 0 0 0 6px rgba(169, 127, 60, 0.5), 0 -6px 14px rgba(var(--warm-shadow), 0.2);
+}
+.env__letter-names { font-weight: 500; }
+.env__letter-date { color: var(--sgold-deep); }
+.env__pocket {
+  background:
+    linear-gradient(to top right, transparent 49.4%, rgba(150, 125, 110, 0.45) 50%, transparent 50.8%) left bottom / 50% 100% no-repeat,
+    linear-gradient(to top left, transparent 49.4%, rgba(150, 125, 110, 0.45) 50%, transparent 50.8%) right bottom / 50% 100% no-repeat,
+    var(--linen-noise) 0 0 / 120px 120px,
+    var(--linen-weave),
+    radial-gradient(ellipse at 50% 100%, #fbf7f2, #f1e8de 60%, #e6d9cc);
+  box-shadow:
+    inset 0 0 0 1.5px var(--sgold),
+    inset 0 0 0 7px rgba(255, 255, 255, 0),
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -4px 6px rgba(var(--warm-shadow), 0.18),
+    inset 0 0 26px rgba(var(--warm-shadow), 0.12);
+}
+.env__flap {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.18), transparent 60%),
+    var(--linen-noise) 0 0 / 120px 120px,
+    var(--linen-weave),
+    linear-gradient(#7d8a67, #687552 70%, #5c6649);
+  filter: drop-shadow(0 2px 0 var(--sgold)) drop-shadow(0 5px 4px rgba(var(--warm-shadow), 0.35)) drop-shadow(0 12px 14px rgba(var(--warm-shadow), 0.22));
+}
+@media (hover: hover) {
+  .env:hover { filter: drop-shadow(0 6px 6px rgba(var(--warm-shadow), 0.2)) drop-shadow(0 30px 34px rgba(var(--warm-shadow), 0.26)); }
+}
+
+/* label seal (replaces the wax heart) */
+.env__seal { width: 92px; height: 110px; top: 56%; animation: label-glow 3s ease-in-out infinite; }
+.closing__seal { width: 80px; height: 96px; }
+.wax svg { filter: drop-shadow(0 2px 2px rgba(var(--warm-shadow), 0.35)) drop-shadow(0 8px 10px rgba(var(--warm-shadow), 0.28)); }
+@keyframes label-glow { 50% { filter: drop-shadow(0 0 12px rgba(255, 246, 240, 0.95)); } }
+@keyframes burst { 0% { opacity: 1; background: rgba(255, 250, 244, 0.95); box-shadow: 0 0 0 0 rgba(255, 240, 232, 0.9); } 100% { opacity: 0; box-shadow: 0 0 80px 60px rgba(255, 240, 232, 0); } }
+
+/* =========================================================
+   CURTAINS — ivory pleated drapes with pearl trim
+   ========================================================= */
+.curtain {
+  background:
+    linear-gradient(180deg, rgba(var(--warm-shadow), 0.16), transparent 18%, transparent 80%, rgba(var(--warm-shadow), 0.18)),
+    repeating-linear-gradient(90deg, rgba(160, 135, 120, 0.3) 0, rgba(255, 255, 255, 0.5) 20px, rgba(255, 255, 255, 0.7) 27px, rgba(160, 135, 120, 0.28) 52px),
+    linear-gradient(90deg, #ece2d8, #faf5ef 50%, #ece2d8);
+  box-shadow: 0 0 30px rgba(var(--warm-shadow), 0.35);
+}
+.curtain::before {
+  height: 14px;
+  border-top: 1px solid var(--sgold);
+  -webkit-mask-image: none;
+  mask-image: none;
+  background: radial-gradient(circle at 50% 45%, #fff 0 1.6px, #efe6dc 2.6px, #c9bcae 5px, transparent 5.6px) 0 50% / 12px 12px repeat-x;
+}
+.curtain::after {
+  width: 12px;
+  background: radial-gradient(circle at 45% 50%, #fff 0 1.6px, #efe6dc 2.6px, #c9bcae 5px, transparent 5.6px) 50% 0 / 12px 12px repeat-y;
+}
+.curtain__tie { width: 30px; background: radial-gradient(circle at 45% 45%, #fff 0 1.5px, #efe6dc 2.6px, #c9bcae 4.6px, transparent 5.2px) 0 0 / 10px 10px; box-shadow: none; filter: drop-shadow(0 3px 3px rgba(var(--warm-shadow), 0.35)); }
+.curtains__valance {
+  background:
+    radial-gradient(ellipse 60px 34px at 60px 0, #f7f0e9 98%, transparent 100%) 0 0 / 120px 70px repeat-x,
+    linear-gradient(#ece2d8, #f8f2ec);
+  filter: drop-shadow(0 3px 0 #efe6dc) drop-shadow(0 5px 4px rgba(var(--warm-shadow), 0.35));
+}
+.curtains__light { background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95), rgba(255, 240, 232, 0.6) 40%, transparent 70%); }
+
+/* =========================================================
+   COVER — names sit straight on the linen, framed by the
+   embroidered drapes; palace, wisteria and roses below
+   ========================================================= */
+.cover {
+  background:
+    var(--linen-noise) 0 0 / 160px 160px,
+    var(--linen-weave),
+    linear-gradient(#ebd0c8, #d9b3a9);
+}
+@media (min-width: 700px) {
+  .cover {
+    background:
+      var(--linen-noise) 0 0 / 160px 160px,
+      var(--linen-weave),
+      radial-gradient(ellipse at 50% 50%, #7a8669, #677255 60%, #555e45);
+  }
+  .cover__scene {
+    box-shadow: 0 0 0 5px var(--pearl), 0 0 0 6px var(--sgold), 0 2px 4px 6px rgba(50, 40, 35, 0.12), 0 30px 60px rgba(40, 32, 28, 0.35);
+  }
+}
+.cover__panel,
+.js .cover__panel {
+  top: 36%;
+  width: min(58%, 330px);
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--charcoal);
+}
+.cover__panel::after { display: none; }
+.cover__eyebrow { font-size: clamp(0.62rem, 1.5cqh, 0.78rem); letter-spacing: 0.22em; color: var(--sgold-deep); }
+.cover__names { display: block; white-space: normal; margin: 1.2cqh 0 0; filter: none; }
+.cover__names span {
+  display: block;
+  padding: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(2.3rem, 6.2cqh, 3.6rem);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  color: var(--charcoal);
+}
+.cover__names .amp { font-style: italic; font-weight: 500; font-size: clamp(1.5rem, 3.8cqh, 2.2rem); line-height: 1.1; color: var(--dusty); }
+.cover__names span + span { margin-top: 0; }
+.orn--plaque { color: var(--sgold); width: 120px; margin: 1cqh auto 0.6cqh; }
+.cover__date { font-family: var(--display); font-style: italic; font-weight: 500; font-size: clamp(1.1rem, 2.6cqh, 1.45rem); letter-spacing: 0.08em; color: var(--charcoal-soft); }
+.cover__venue { margin-top: 0.6cqh; font-size: clamp(0.58rem, 1.4cqh, 0.72rem); color: var(--sgold-deep); }
+.cover__cue { color: var(--charcoal-soft); text-shadow: none; }
+.cover__cue i { background: linear-gradient(var(--charcoal-soft), transparent); }
+@media (max-width: 699px) {
+  .cover__panel, .js .cover__panel { width: 62%; top: 36%; bottom: auto; }
+  .cover__names span { font-size: clamp(2.2rem, 10.4vw, 2.9rem); }
+  .cover__names .amp { font-size: 1.6rem; }
+}
+
+/* =========================================================
+   TILES — ivory linen cards, thin gold double outline,
+   pearl corner sprigs, rose & wisteria crest
+   ========================================================= */
+.tile {
+  color: var(--charcoal);
+  border: 1px solid var(--sgold);
+  border-radius: 3px;
+  background:
+    var(--bc-tl) left 9px top 9px / 40px no-repeat, var(--bc-tr) right 9px top 9px / 40px no-repeat,
+    var(--bc-bl) left 9px bottom 9px / 40px no-repeat, var(--bc-br) right 9px bottom 9px / 40px no-repeat,
+    var(--linen-noise) 0 0 / 160px 160px,
+    var(--linen-weave),
+    linear-gradient(#fbf7f3, #f3eae3);
+  box-shadow:
+    0 0 0 4px var(--ivory-card),
+    0 0 0 5px rgba(169, 127, 60, 0.7),
+    0 2px 3px 5px rgba(var(--warm-shadow), 0.08),
+    0 14px 24px 2px rgba(var(--warm-shadow), 0.12),
+    0 32px 52px -10px rgba(var(--warm-shadow), 0.24),
+    inset 0 1px 0 #fff,
+    inset 0 -2px 0 rgba(150, 120, 105, 0.14);
+}
+.tile::after { inset: 7px; border: 1px solid rgba(169, 127, 60, 0.45); border-radius: 2px; }
+.tile::before { top: -36px; width: 124px; height: 52px; background: var(--bloom-crest) center bottom / contain no-repeat; filter: none; }
+@media (hover: hover) {
+  .js .tile.reveal.is-in:hover {
+    box-shadow:
+      0 0 0 4px var(--ivory-card), 0 0 0 5px rgba(169, 127, 60, 0.7),
+      0 4px 6px 5px rgba(var(--warm-shadow), 0.08), 0 22px 32px 4px rgba(var(--warm-shadow), 0.13), 0 44px 70px -10px rgba(var(--warm-shadow), 0.26),
+      inset 0 1px 0 #fff, inset 0 -2px 0 rgba(150, 120, 105, 0.14);
+  }
+}
+
+.host__blessing { color: var(--sgold-deep); }
+.host__parents { font-family: var(--display); font-weight: 600; color: var(--charcoal); font-size: clamp(1.35rem, 5.4vw, 1.6rem); }
+.host__invite { color: var(--charcoal-soft); }
+.host__name { font-weight: 500; color: var(--dusty-deep); filter: none; font-size: clamp(2.6rem, 11vw, 3.4rem); line-height: 1.15; }
+.host__to { color: var(--charcoal-soft); }
+.facts li { font-family: var(--display); font-weight: 600; color: var(--charcoal); font-size: clamp(1.25rem, 5vw, 1.45rem); }
+.facts svg { color: var(--dusty); }
+.dress { border-top-color: rgba(169, 127, 60, 0.45); }
+.dress__label { color: var(--sgold-deep); }
+.dress__value { font-style: italic; font-weight: 500; color: var(--dusty-deep); font-size: clamp(1.6rem, 6.4vw, 2rem); }
+.countdown span { font-family: var(--display); font-weight: 600; color: var(--dusty-deep); }
+.countdown small { color: var(--charcoal-soft); }
+.countdown div + div { border-left-color: rgba(169, 127, 60, 0.45); }
+
+.rsvp__welcome { font-family: var(--display); font-style: italic; font-weight: 500; color: var(--dusty-deep); font-size: 1.6rem; }
+.rsvp__msg { color: var(--charcoal); }
+.rsvp__label { font-family: var(--label); color: var(--charcoal); }
+.contact__name { font-weight: 500; color: var(--dusty-deep); font-size: 2.1rem; }
+.contact__phone a { color: var(--charcoal); }
+
+/* buttons: soft blush pills (WhatsApp / Call) */
+.btn {
+  font-family: var(--label);
+  font-weight: 600;
+  color: var(--charcoal);
+  border: 1px solid rgba(169, 127, 60, 0.75);
+  background: linear-gradient(#f2d8d7, #e3bcbc);
+  box-shadow: 0 2px 4px rgba(var(--warm-shadow), 0.14), inset 0 1px 0 #fff;
+}
+.btn svg { color: var(--dusty-deep); }
+.btn:active { background: #dfb9ba; }
+@media (hover: hover) { .btn:hover { background: linear-gradient(#ecccca, #d9afb0); border-color: var(--sgold); } }
+/* Directions / Add to calendar: underlined text links, as in the reel */
+.btns--links { gap: 6px 22px; }
+.btns--links .btn {
+  min-height: 30px;
+  padding: 0 2px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  text-decoration: underline;
+  text-decoration-color: var(--sgold);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+@media (hover: hover) { .btns--links .btn:hover { background: none; color: var(--dusty-deep); } }
+
+/* closing */
+.closing__names { font-weight: 500; color: var(--charcoal); font-size: clamp(2.6rem, 11vw, 3.8rem); }
+.closing__names .amp, .env__letter-names .amp { font-style: italic; color: var(--dusty); }
+.closing__date { font-family: var(--display); color: var(--sgold-deep); }
+.closing__signoff { color: var(--charcoal-soft); }
+.closing__top { color: var(--sgold-deep); }
+
+.music { background: rgba(246, 239, 233, 0.85); color: var(--dusty-deep); border-color: rgba(169, 127, 60, 0.7); }
+
+/* =========================================================
+   PETALS — blush, ivory and a few lavender
+   ========================================================= */
+.shower__p { box-shadow: inset -2px -3px 4px rgba(var(--warm-shadow), 0.22), inset 2px 2px 3px rgba(255, 255, 255, 0.55); }
+.shower__p--blush { background: radial-gradient(ellipse at 45% 30%, #f8e0e0, #daa3a7 50%, #b8757e); }
+.shower__p--dusty { background: radial-gradient(ellipse at 45% 30%, #d6909c, #a8606f 50%, #7d4254); }
+.shower__p--ivory { background: radial-gradient(ellipse at 45% 30%, #fffdf9, #f4ece2 55%, #dccfc1); }
+.shower__p--lav { background: radial-gradient(ellipse at 45% 30%, #cdbbe0, #9273b6 50%, #6a4b8a); }
+
+/* ---- fit tweaks ---- */
+.closing__names { white-space: nowrap; font-size: clamp(2.2rem, 9.4vw, 3.6rem); }
+.rsvp__welcome { font-size: clamp(1.3rem, 5.4vw, 1.6rem); }
+.curtain__tie { top: 56%; width: 40px; height: 12px; border-radius: 6px; background: radial-gradient(circle at 45% 45%, #fff 0 1.6px, #efe6dc 2.8px, #c9bcae 5px, transparent 5.6px) 0 50% / 10px 12px repeat-x; }
+.curtain--l .curtain__tie { right: 6px; }
+.curtain--r .curtain__tie { left: 6px; }
+
+/* ---- slimmer, more elegant WhatsApp / Call buttons ---- */
+.contact .btns { gap: 10px; margin-top: 10px; }
+.contact .btn {
+  min-height: 28px;
+  padding: 0 13px;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.64rem;
+  letter-spacing: 0.18em;
+  color: var(--dusty-deep);
+  border: 1px solid rgba(169, 127, 60, 0.55);
+  background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(245, 226, 225, 0.6));
+  box-shadow: 0 1px 2px rgba(var(--warm-shadow), 0.12), inset 0 0 0 2px rgba(255, 255, 255, 0.6);
+}
+.contact .btn svg { width: 12px; height: 12px; }
+@media (hover: hover) { .contact .btn:hover { background: linear-gradient(#f2d8d7, #ecd0d0); border-color: var(--sgold); } }
+
+/* hall name: a quiet second line under the venue */
+.facts__hall { display: block; margin-top: -2px; font-family: var(--display); font-style: italic; font-weight: 500; font-size: 0.82em; letter-spacing: 0.04em; color: var(--dusty-deep); text-align: center; }
+
+/* =========================================================
+   3D NAMES — raised lettering: light top edge, shallow
+   stepped extrusion, then a soft cast shadow on the linen
+   ========================================================= */
+.envelope__names,
+.cover__names span:not(.amp),
+.closing__names,
+.env__letter-names,
+.host__name { font-weight: 600; }
+.envelope__names,
+.cover__names span:not(.amp),
+.closing__names,
+.env__letter-names {
+  color: #3a3132;
+  text-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 0 rgba(150, 110, 104, 0.75),
+    0 2px 0 rgba(130, 92, 88, 0.55),
+    0 3px 1px rgba(110, 75, 72, 0.35),
+    0 6px 8px rgba(70, 35, 35, 0.28),
+    0 12px 22px rgba(70, 35, 35, 0.2);
+}
+.host__name {
+  text-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.95),
+    0 1px 0 rgba(170, 100, 115, 0.75),
+    0 2px 0 rgba(140, 75, 92, 0.55),
+    0 3px 1px rgba(110, 55, 72, 0.35),
+    0 6px 8px rgba(80, 30, 45, 0.26),
+    0 12px 20px rgba(80, 30, 45, 0.18);
+}
+.cover__names .amp, .envelope__names .amp, .closing__names .amp {
+  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.8), 0 1px 0 rgba(150, 90, 100, 0.6), 0 3px 5px rgba(80, 30, 45, 0.28);
+}
+.cover__names { margin-bottom: 0.4cqh; }
+
+/* order of the day — a quiet list inside The Engagement card */
+.timeline { list-style: none; margin: 16px auto 0; padding: 12px 0 0; max-width: 360px; border-top: 1px solid rgba(169, 127, 60, 0.4); display: grid; gap: 7px; position: relative; z-index: 1; }
+.timeline li { display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; gap: 10px; }
+.timeline li::before { content: ''; grid-column: 2; grid-row: 1; width: 5px; height: 5px; border-radius: 50%; align-self: center; background: radial-gradient(circle at 35% 35%, #fff, #efe6dc 55%, #c9bcae); box-shadow: 0 0 0 1px rgba(169, 127, 60, 0.35); }
+.timeline__time { grid-column: 1; grid-row: 1; text-align: right; font-family: var(--label); font-weight: 500; font-size: 0.62rem; letter-spacing: 0.12em; color: var(--sgold-deep); white-space: nowrap; }
+.timeline__label { grid-column: 3; grid-row: 1; text-align: left; font-family: var(--display); font-style: italic; font-weight: 500; font-size: 1.05rem; line-height: 1.25; color: var(--charcoal-soft); }

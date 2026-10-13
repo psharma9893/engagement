@@ -14,6 +14,11 @@ import '@fontsource/cinzel/latin-500.css';
 import '@fontsource/cinzel/latin-600.css';
 import './styles/engagement.css';
 import './styles/heritage.css';
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-500-italic.css';
+import '@fontsource/cormorant-garamond/latin-600.css';
+import './styles/blush-uris.css';
+import './styles/blush.css';
 
 declare global {
   interface Window {
@@ -94,7 +99,7 @@ function showerPetals(): void {
   const box = document.createElement('div');
   box.className = 'shower';
   box.setAttribute('aria-hidden', 'true');
-  const kinds = ['rose', 'rose-deep', 'rose', 'rose-crimson', 'rose-deep']; // red rose petals
+  const kinds = ['blush', 'ivory', 'dusty', 'blush', 'lav', 'ivory', 'blush']; // blush, ivory & a few lavender petals
   for (let i = 0; i < count; i++) {
     const p = document.createElement('i');
     p.className = `shower__p shower__p--${kinds[i % kinds.length]}`;
