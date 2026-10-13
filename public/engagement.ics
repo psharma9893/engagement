@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Pranshu & Nishtha//Engagement//EN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:engagement-2026@pranshu-nishtha
+DTSTAMP:20261001T000000Z
+DTSTART:20261206T053000Z
+DTEND:20261206T113000Z
+SUMMARY:Engagement · Pranshu & Nishtha
+LOCATION:Royal Pepper Resorts
+DESCRIPTION:11:00 AM – 5:00 PM — Dress code: Suits\, Gowns & Good Vibes — https://maps.app.goo.gl/r9jxGu99wenfUFJZ7
+URL:https://maps.app.goo.gl/r9jxGu99wenfUFJZ7
+END:VEVENT
+END:VCALENDAR

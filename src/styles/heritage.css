@@ -1,0 +1,354 @@
+/* =========================================================
+   ROYAL HERITAGE — burgundy, antique gold, cream
+   Palace arches, carved patterns, ornamental frames.
+   Overrides engagement.css (loaded after it).
+   ========================================================= */
+:root {
+  --burgundy: #6b1a2a;
+  --burgundy-deep: #4d1220;
+  --burgundy-lift: #82283a;
+  --antique: #b39555;
+  --antique-deep: #8a6c34;
+  --antique-light: #e2cc93;
+  --cream: #efe5cf;
+  --cream-deep: #ddcfb0;
+  --ink: #4a1220;
+  --label: 'Cinzel', 'Prata', Georgia, serif;
+  --line: rgba(226, 204, 147, 0.85);
+  --gold-lotus: #e6cf96;
+}
+
+body {
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 252, 240, 0.7), transparent 60%),
+    var(--paisley) center / 120px 120px,
+    linear-gradient(180deg, #ece2ca, #ddcfaf);
+}
+.eyebrow { font-family: var(--label); font-weight: 600; letter-spacing: 0.2em; color: var(--antique-light); }
+
+/* ---------------- carved pillar rails ---------------- */
+.page-border { background: var(--rail-thin) left top / 14px 24px repeat-y; box-shadow: 0 0 12px rgba(80, 40, 10, 0.25); }
+@media (min-width: 1100px) {
+  .page-border { background: var(--rail-full) left top / 100% auto repeat-y; }
+}
+
+/* =========================================================
+   ENVELOPE — burgundy card with cream palace-arch frame
+   ========================================================= */
+.envelope__bg {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(255, 250, 236, 0.95), rgba(236, 224, 196, 0.55) 55%, transparent 80%),
+    var(--paisley) center / 110px 110px,
+    linear-gradient(#ece2ca, #d9c9a6);
+}
+.envelope__bg::before {
+  /* ornamental frame around the whole envelope screen */
+  content: '';
+  position: absolute;
+  inset: 18px calc(var(--rail) + 10px);
+  border: 1px solid var(--antique);
+  outline: 1px solid rgba(138, 108, 52, 0.45);
+  outline-offset: -7px;
+  background: var(--pc-tl) left 6px top 6px / 58px no-repeat, var(--pc-tr) right 6px top 6px / 58px no-repeat,
+    var(--pc-bl) left 6px bottom 6px / 58px no-repeat, var(--pc-br) right 6px bottom 6px / 58px no-repeat;
+  pointer-events: none;
+}
+.envelope__eyebrow { font-family: var(--label); font-weight: 600; letter-spacing: 0.18em; color: var(--antique-deep); }
+.envelope__names { color: var(--burgundy); }
+.envelope__line { color: var(--burgundy-deep); }
+.envelope__hint { color: var(--antique-deep); }
+
+.env__back {
+  background: var(--paisley) center / 70px 70px, linear-gradient(#5a1424, #3f0c17);
+  box-shadow: 0 40px 70px -24px rgba(60, 20, 10, 0.6), inset 0 0 0 2px var(--antique);
+}
+.env__letter { background: var(--cream); color: var(--burgundy); box-shadow: inset 0 0 0 1px var(--antique), inset 0 0 0 5px var(--cream), inset 0 0 0 6px rgba(138, 108, 52, 0.5); }
+.env__letter-date { font-family: var(--label); color: var(--antique-deep); }
+.env__pocket {
+  background:
+    var(--pocket-arch) center bottom / 82% 78% no-repeat,
+    linear-gradient(to top right, transparent 49.4%, rgba(30, 0, 6, 0.4) 50%, transparent 50.8%) left bottom / 50% 100% no-repeat,
+    linear-gradient(to top left, transparent 49.4%, rgba(30, 0, 6, 0.4) 50%, transparent 50.8%) right bottom / 50% 100% no-repeat,
+    var(--paisley) center / 70px 70px,
+    radial-gradient(ellipse at 50% 90%, #8a2c3c, #6b1a2a 55%, #4d1220);
+  box-shadow: inset 0 0 0 2px var(--antique), inset 0 0 0 7px rgba(239, 229, 207, 0.0), inset 0 0 0 8px rgba(226, 204, 147, 0.6);
+}
+.env__flap {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 220, 190, 0.18), transparent 60%),
+    var(--paisley) center top / 70px 70px,
+    linear-gradient(#7c2233, #651a2a 70%, #521322);
+  filter: drop-shadow(0 2px 0 var(--antique)) drop-shadow(0 6px 8px rgba(20, 0, 5, 0.45));
+}
+
+/* =========================================================
+   CURTAINS — fade in already closed, then part gracefully
+   ========================================================= */
+.curtains { opacity: 0; transition: opacity 0.7s ease; }
+.curtain { transform: none; transition: none; }
+.curtain {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.32), transparent 18%, transparent 78%, rgba(0, 0, 0, 0.35)),
+    repeating-linear-gradient(90deg, rgba(30, 0, 8, 0.5) 0, rgba(255, 190, 180, 0.1) 20px, rgba(255, 205, 195, 0.16) 27px, rgba(30, 0, 8, 0.45) 52px),
+    linear-gradient(90deg, #5a1424, #7c2233 50%, #5a1424);
+}
+.curtain::before { border-top-color: var(--antique); background: repeating-linear-gradient(90deg, #e9d49c 0 2px, #8a6c34 2px 4px, transparent 4px 7px); }
+.curtain::after { background: linear-gradient(90deg, #8a6c34, #efdca6 45%, #8a6c34); }
+.curtain__tie { background: repeating-linear-gradient(180deg, #e9d49c 0 3px, #8a6c34 3px 6px); opacity: 1; }
+.curtains__valance {
+  transform: none;
+  transition: none;
+  background:
+    radial-gradient(ellipse 60px 34px at 60px 0, #6b1a2a 98%, transparent 100%) 0 0 / 120px 70px repeat-x,
+    linear-gradient(#4d1220, #6b1a2a);
+  filter: drop-shadow(0 4px 0 var(--antique));
+}
+.curtain-close .curtains { opacity: 1; }
+.curtain-close .curtain { transform: none; }
+.curtain-close .curtains__valance { transform: none; }
+.curtain-close .curtains__light { opacity: 0.55; transition: opacity 0.6s 0.4s; }
+/* part: each half draws back to its side and gathers into soft folds, then the whole set fades */
+.curtain-open .curtain--l,
+.curtain-open .curtain--r { animation: none; }
+.curtain-open .curtain--l { animation: part-l 2.1s cubic-bezier(0.65, 0, 0.25, 1) forwards; }
+.curtain-open .curtain--r { animation: part-r 2.1s cubic-bezier(0.65, 0, 0.25, 1) forwards; }
+.curtain-open .curtain__tie { opacity: 0; transition: opacity 0.3s; }
+.curtain-open .curtains__valance { transform: translateY(-110%); transition: transform 0.8s ease-in 1.3s; }
+.curtain-open .curtains { opacity: 0; transition: opacity 0.6s ease 1.7s; }
+@keyframes part-l {
+  0%   { transform: scaleX(1); }
+  100% { transform: scaleX(0.13) skewY(-4deg); }
+}
+@keyframes part-r {
+  0%   { transform: scaleX(1); }
+  100% { transform: scaleX(0.13) skewY(4deg); }
+}
+
+/* =========================================================
+   COVER — cream name plaque with ornamental frame
+   ========================================================= */
+.cover {
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(255, 250, 236, 0.85), transparent 60%),
+    var(--paisley) center / 120px 120px,
+    linear-gradient(#e9dfc6, #d6c6a3);
+}
+.cover__panel {
+  top: 52%;
+  bottom: auto;
+  transform: translate(-50%, -38%);
+  width: min(72%, 380px);
+  padding: 34px 26px 26px;
+  border-radius: 6px;
+  color: var(--burgundy);
+  background:
+    var(--pc-tl) left 6px top 6px / 40px no-repeat, var(--pc-tr) right 6px top 6px / 40px no-repeat,
+    var(--pc-bl) left 6px bottom 6px / 40px no-repeat, var(--pc-br) right 6px bottom 6px / 40px no-repeat,
+    radial-gradient(ellipse at 50% 30%, #fbf6ea, #efe5cf 70%, #e3d6b6);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow:
+    0 0 0 1px var(--antique),
+    0 0 0 5px var(--cream),
+    0 0 0 6px var(--burgundy),
+    0 0 0 9px var(--cream),
+    0 0 0 10px var(--antique),
+    0 26px 50px -18px rgba(40, 8, 16, 0.75);
+}
+.cover__panel::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(138, 108, 52, 0.55);
+  pointer-events: none;
+}
+.plaque__crest {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  width: 112px;
+  height: 42px;
+  transform: translateX(-50%);
+  background: var(--crest) center / contain no-repeat;
+  filter: drop-shadow(0 -2px 2px rgba(60, 20, 10, 0.25));
+}
+.cover__eyebrow { font-family: var(--label); font-weight: 600; font-size: clamp(0.78rem, 1.9cqh, 0.98rem); letter-spacing: 0.2em; color: var(--antique-deep); text-shadow: none; }
+.cover__names { filter: none; margin-top: 2px; }
+.cover__names span { color: var(--burgundy); font-size: clamp(2.8rem, 7.4cqh, 4.4rem); }
+.cover__names .amp { color: var(--antique-deep); font-size: clamp(1.6rem, 4cqh, 2.4rem); }
+.orn--plaque { color: var(--antique); margin: 10px auto 8px; }
+.cover__date { color: var(--burgundy-deep); text-shadow: none; font-size: clamp(1.3rem, 3.2cqh, 1.9rem); }
+.cover__venue { font-family: var(--label); font-weight: 600; color: var(--antique-deep); letter-spacing: 0.18em; }
+.cover__cue { color: var(--cream); }
+.js .cover__panel { transform: translate(-50%, -32%); opacity: 0; }
+.js .cover.is-revealed .cover__panel { transform: translate(-50%, -38%); opacity: 1; }
+@media (max-width: 699px) {
+  .cover__panel { width: 80%; padding: 30px 18px 22px; top: 54%; }
+}
+
+/* =========================================================
+   TILES — burgundy panel inside a cream & antique-gold frame,
+   arch crest on top, carved corners
+   ========================================================= */
+.tile {
+  margin-top: 24px;
+  border: 1px solid var(--antique);
+  border-radius: 4px;
+  color: var(--cream);
+  background:
+    var(--hc-tl) left 12px top 12px / var(--fil) no-repeat, var(--hc-tr) right 12px top 12px / var(--fil) no-repeat,
+    var(--hc-bl) left 12px bottom 12px / var(--fil) no-repeat, var(--hc-br) right 12px bottom 12px / var(--fil) no-repeat,
+    var(--paisley) center / 90px 90px,
+    radial-gradient(ellipse at 50% 25%, var(--burgundy-lift) 0%, var(--burgundy) 50%, var(--burgundy-deep) 100%);
+  box-shadow:
+    0 0 0 5px var(--cream),
+    0 0 0 6px var(--antique),
+    0 0 0 9px var(--cream-deep),
+    0 0 0 10px rgba(138, 108, 52, 0.6),
+    0 30px 50px -22px rgba(60, 15, 20, 0.6);
+}
+.tile::after { inset: 7px; border: 1px solid rgba(226, 204, 147, 0.55); border-radius: 2px; }
+.tile::before {
+  content: '';
+  position: absolute;
+  top: -44px;
+  left: 50%;
+  width: 120px;
+  height: 44px;
+  transform: translateX(-50%);
+  background: var(--crest) center bottom / contain no-repeat;
+  pointer-events: none;
+}
+.details, .details__side { gap: 46px; }
+.page--details .page__inner, .page--rsvp .page__inner { padding: 0 10px; }
+
+/* type */
+.host__blessing { font-family: var(--label); font-weight: 600; font-size: 0.95rem; letter-spacing: 0.2em; color: var(--antique-light); }
+.host__parents { font-family: var(--display); font-weight: 600; color: #fff7e8; font-size: clamp(1.22rem, 5vw, 1.45rem); }
+.host__invite { color: #f1e4cc; font-size: 1.22rem; }
+.host__name { color: var(--antique-light); }
+.host__to { color: #f1e4cc; }
+.tile--event .eyebrow { font-size: 0.95rem; }
+.facts li { color: #fff7e8; font-size: clamp(1.12rem, 4.6vw, 1.32rem); }
+.facts svg { color: var(--antique-light); }
+.dress { border-top-color: rgba(226, 204, 147, 0.4); }
+.dress__label { font-family: var(--label); font-weight: 600; color: var(--antique-light); }
+.dress__value { color: #fff1d8; }
+.countdown span { color: var(--antique-light); }
+.countdown small { font-family: var(--label); color: #f1e4cc; }
+.countdown div + div { border-left-color: rgba(226, 204, 147, 0.35); }
+
+.rsvp__welcome { color: var(--antique-light); }
+.rsvp__msg { color: #f6ead3; }
+.rsvp__label { font-family: var(--label); font-weight: 600; letter-spacing: 0.14em; color: var(--antique-light); }
+.contact__name { color: var(--antique-light); }
+.orn { color: var(--antique); }
+.tile .orn { color: var(--antique-light); }
+
+/* buttons: antique-gold outline pills, Cinzel */
+.btn { font-family: var(--label); font-weight: 600; letter-spacing: 0.12em; color: var(--antique-light); border-color: rgba(226, 204, 147, 0.65); }
+
+/* closing */
+.closing__names { color: var(--burgundy); }
+.closing__date { color: var(--antique-deep); }
+.closing__signoff { color: var(--burgundy-deep); }
+.closing__top { font-family: var(--label); font-weight: 600; color: var(--antique-deep); }
+
+.music { background: rgba(77, 18, 32, 0.6); color: var(--antique-light); border-color: rgba(179, 149, 85, 0.6); }
+
+/* ---- compact nameplate (like a palace name plaque), leaves the arch & chhatris visible ---- */
+.cover__panel {
+  top: 56%;
+  width: min(62%, 360px);
+  padding: 24px 16px 18px;
+}
+.js .cover__panel { transform: translate(-50%, -44%); }
+.js .cover.is-revealed .cover__panel, .cover__panel { transform: translate(-50%, -50%); }
+.cover__names { display: flex; align-items: baseline; justify-content: center; gap: 0.18em; white-space: nowrap; margin: 2px 0 0; }
+.cover__names span { display: inline; padding: 0.16em 0 0.02em; font-size: clamp(1.9rem, 5vw, 2.9rem); line-height: 1.2; }
+.cover__names span + span { margin-top: 0; }
+.cover__names .amp { font-size: 1.3rem; }
+.orn--plaque { margin: 4px auto 6px; width: 150px; }
+.cover__date { font-size: clamp(1.15rem, 2.6cqh, 1.5rem); }
+.cover__venue { margin-top: 4px; font-size: 0.72rem; }
+.cover__eyebrow { font-size: 0.74rem; }
+@media (max-width: 699px) { .cover__panel { width: 82%; top: 55%; } .cover__names span { font-size: clamp(1.75rem, 8.4vw, 2.3rem); } }
+/* desktop: the scene sits like a card on burgundy velvet */
+@media (min-width: 700px) {
+  .cover {
+    background:
+      var(--paisley) center / 120px 120px,
+      radial-gradient(ellipse at 50% 50%, #7c2233, #5a1424 60%, #3f0c17);
+  }
+  .cover__scene { box-shadow: 0 0 0 6px var(--cream), 0 0 0 7px var(--antique), 0 0 60px rgba(0, 0, 0, 0.45); }
+}
+@media (max-width: 420px) { .tile--count .eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; } .countdown small { font-size: 0.5rem; letter-spacing: 0.06em; } }
+
+/* ---- heart wax seal sizing & 3D burgundy pillar rails ---- */
+.env__seal { width: 110px; height: 110px; top: 57%; }
+.closing__seal { width: 100px; height: 100px; }
+.page-border { box-shadow: 0 0 18px rgba(40, 6, 14, 0.55); }
+.page-border--l { box-shadow: 6px 0 16px -4px rgba(40, 6, 14, 0.55); }
+.page-border--r { box-shadow: 6px 0 16px -4px rgba(40, 6, 14, 0.55); }
+
+/* =========================================================
+   3D "pop-out" — tiles and envelope sit raised off the page
+   (layered soft shadows + bevelled light edge + inner depth)
+   ========================================================= */
+.tile {
+  transform: translateZ(0);
+  box-shadow:
+    0 0 0 5px var(--cream),
+    0 0 0 6px var(--antique),
+    0 0 0 9px var(--cream-deep),
+    0 0 0 10px rgba(138, 108, 52, 0.6),
+    /* lift: a tight contact shadow + two soft falloffs */
+    0 3px 4px 10px rgba(60, 15, 20, 0.18),
+    0 14px 22px 6px rgba(60, 15, 20, 0.2),
+    0 34px 60px -6px rgba(50, 10, 18, 0.38),
+    /* bevel: light catches the top edge, shade on the bottom, depth inside */
+    inset 0 2px 0 rgba(255, 225, 200, 0.28),
+    inset 0 -3px 0 rgba(20, 0, 6, 0.35),
+    inset 0 0 40px rgba(20, 0, 6, 0.35);
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.js .tile.reveal { transform: translateY(26px) scale(0.98); }
+.js .tile.reveal.is-in { transform: translateY(0) scale(1); }
+@media (hover: hover) {
+  .js .tile.reveal.is-in:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 0 5px var(--cream), 0 0 0 6px var(--antique), 0 0 0 9px var(--cream-deep), 0 0 0 10px rgba(138, 108, 52, 0.6),
+      0 6px 8px 10px rgba(60, 15, 20, 0.16), 0 22px 32px 8px rgba(60, 15, 20, 0.2), 0 46px 80px -6px rgba(50, 10, 18, 0.4),
+      inset 0 2px 0 rgba(255, 225, 200, 0.3), inset 0 -3px 0 rgba(20, 0, 6, 0.35), inset 0 0 40px rgba(20, 0, 6, 0.35);
+  }
+}
+.tile::before { filter: drop-shadow(0 -2px 2px rgba(60, 15, 20, 0.25)) drop-shadow(0 3px 3px rgba(60, 15, 20, 0.2)); }
+.cover__panel {
+  box-shadow:
+    0 0 0 1px var(--antique), 0 0 0 5px var(--cream), 0 0 0 6px var(--burgundy), 0 0 0 9px var(--cream), 0 0 0 10px var(--antique),
+    0 4px 6px 10px rgba(40, 8, 16, 0.2), 0 18px 28px 6px rgba(40, 8, 16, 0.28), 0 40px 70px -10px rgba(40, 8, 16, 0.55),
+    inset 0 2px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 0 rgba(138, 108, 52, 0.35);
+}
+
+/* envelope: raised card with bevelled paper edges and a soft floor shadow */
+.env { filter: drop-shadow(0 4px 4px rgba(50, 12, 18, 0.25)) drop-shadow(0 20px 26px rgba(50, 12, 18, 0.28)); }
+.env__back { box-shadow: 0 46px 70px -26px rgba(50, 12, 18, 0.55), inset 0 0 0 2px var(--antique), inset 0 2px 0 rgba(255, 220, 200, 0.25); }
+.env__pocket {
+  box-shadow:
+    inset 0 0 0 2px var(--antique),
+    inset 0 0 0 8px rgba(226, 204, 147, 0.0),
+    inset 0 2px 0 rgba(255, 220, 200, 0.3),
+    inset 0 -4px 6px rgba(20, 0, 6, 0.45),
+    inset 0 0 30px rgba(20, 0, 6, 0.3);
+}
+.env__flap { filter: drop-shadow(0 2px 0 var(--antique)) drop-shadow(0 5px 4px rgba(20, 0, 6, 0.45)) drop-shadow(0 12px 14px rgba(20, 0, 6, 0.3)); }
+.env__letter { box-shadow: inset 0 0 0 1px var(--antique), inset 0 0 0 5px var(--cream), inset 0 0 0 6px rgba(138, 108, 52, 0.5), 0 -6px 14px rgba(40, 8, 16, 0.25); }
+@media (hover: hover) {
+  .env { transition: transform 0.4s var(--ease), filter 0.4s var(--ease); }
+  .env:hover { transform: translateY(-4px); filter: drop-shadow(0 6px 6px rgba(50, 12, 18, 0.25)) drop-shadow(0 30px 34px rgba(50, 12, 18, 0.3)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .tile.reveal, .js .tile.reveal.is-in { transform: none; }
+}
