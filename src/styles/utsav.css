@@ -1,0 +1,367 @@
+/* =========================================================
+   SINDOOR & MARIGOLD — rich, bold Hindu festive palette:
+   sindoor red and maroon grounds with a gold buti print,
+   marigold torans and ladis, haldi yellow, mango-leaf green,
+   ivory-cream cards with sindoor & gold borders.
+   Loaded last: overrides engagement.css, heritage.css and
+   blush.css. Layout and structure are unchanged.
+   ========================================================= */
+:root {
+  --sindoor: #b3122a;
+  --sindoor-deep: #7a0a1c;
+  --maroon: #5e0b1a;
+  --maroon-deep: #3e0610;
+  --marigold: #f59a1b;
+  --saffron: #e8641b;
+  --haldi: #f6c445;
+  --ugold: #d9a53c;
+  --ugold-light: #ffe39a;
+  --ugold-deep: #8a5a12;
+  --leaf: #2f7d32;
+  --cream: #fff6e3;
+  --cream-deep: #fbe6bf;
+  --uink: #4a0b16;
+  --uink-soft: #6e2a2a;
+  --ink: var(--uink);
+  --warm-shadow: 60, 4, 14;
+  --velvet:
+    var(--buti) 0 0 / 48px 48px,
+    radial-gradient(ellipse at 50% 30%, #8e1a2a, #6a0e1e 55%, #430712);
+}
+
+body { color: var(--uink); background: var(--velvet); }
+.eyebrow { color: var(--sindoor); }
+.orn, .tile .orn { color: var(--ugold); }
+:focus-visible { outline-color: var(--haldi); }
+
+/* ---------------- marigold ladi side rails ---------------- */
+.page-border,
+.page-border--l,
+.page-border--r {
+  background: var(--rail-ladi) center top / 14px 26px repeat-y, linear-gradient(90deg, #4a0812, #6e1022);
+  box-shadow: 4px 0 12px -3px rgba(var(--warm-shadow), 0.6);
+}
+@media (min-width: 1100px) {
+  .page-border {
+    background:
+      var(--rail-ladi) right 18px top / 18px 34px repeat-y,
+      var(--buti) 0 0 / 48px 48px,
+      linear-gradient(90deg, #3e0610, #5e0b1a 70%, #7a1426);
+    box-shadow: inset -2px 0 0 var(--ugold), 6px 0 18px -4px rgba(var(--warm-shadow), 0.7);
+  }
+}
+
+/* =========================================================
+   OPENING — Shri Ganesha with the shlokas
+   ========================================================= */
+.opening {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(28px, 6vh, 64px) calc(var(--rail) + 14px) clamp(56px, 9vh, 88px);
+  background:
+    var(--mandala) center 46% / min(130vw, 900px) no-repeat,
+    var(--velvet);
+}
+.opening__art {
+  position: relative;
+  margin: 0;
+  width: min(100%, 480px, calc((100svh - 130px) * 0.667));
+  padding: 4px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #ffe7a3 0%, #b8893b 38%, #ffe39a 62%, #9c7130 100%);
+  box-shadow: 0 0 0 5px var(--sindoor), 0 0 0 6px var(--ugold), 0 34px 70px -20px rgba(20, 0, 4, 0.8);
+  container-type: inline-size;
+}
+.opening__img { display: block; width: 100%; height: auto; border-radius: 7px; }
+.opening__invocation {
+  position: absolute;
+  left: 50%;
+  top: 23.6%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-family: 'Tiro Devanagari Hindi', 'Kohinoor Devanagari', 'Noto Serif Devanagari', serif;
+  font-size: clamp(13px, 4cqw, 22px);
+  color: var(--sindoor-deep);
+  text-shadow: 0 0 10px rgba(255, 248, 235, 0.95), 0 0 2px rgba(255, 248, 235, 0.95);
+}
+.opening__shloka {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  padding: 13% 5% 5%;
+  border-radius: 0 0 7px 7px;
+  font-family: 'Tiro Devanagari Hindi', 'Kohinoor Devanagari', 'Noto Serif Devanagari', serif;
+  font-size: clamp(11.5px, 3.45cqw, 19px);
+  line-height: 1.55;
+  text-align: center;
+  color: var(--ugold-light);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(to bottom, rgba(70, 6, 18, 0) 0%, rgba(70, 6, 18, 0.82) 32%, rgba(50, 4, 12, 0.95) 100%);
+}
+.opening__cue {
+  position: absolute;
+  left: 50%;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--label);
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ugold-light);
+  text-decoration: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.opening__cue i { width: 1px; height: 22px; background: linear-gradient(var(--ugold-light), transparent); animation: cue 2.4s ease infinite; transform-origin: top; }
+.js .opening__art { opacity: 0; transform: translateY(16px) scale(0.98); transition: opacity 1.2s var(--ease) 0.3s, transform 1.2s var(--ease) 0.3s; }
+.js .opening.is-revealed .opening__art { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js .opening__art { transform: none; transition: opacity 0.3s; }
+  .opening__cue i, .cover__svg .flame, .cover__svg .flag { animation: none !important; }
+}
+
+/* =========================================================
+   ENVELOPE SCREEN — maroon velvet, gold frame with marigold
+   corners, sindoor envelope with a cream pocket
+   ========================================================= */
+.envelope__bg {
+  background:
+    radial-gradient(ellipse at 50% 44%, rgba(255, 170, 70, 0.22), transparent 62%),
+    var(--mandala) center 44% / min(140vw, 760px) no-repeat,
+    var(--velvet);
+}
+.envelope__bg::before {
+  border: 1.5px solid var(--ugold);
+  outline: 1px solid rgba(255, 227, 154, 0.45);
+  outline-offset: -7px;
+  background: var(--uc-tl) left 4px top 4px / 52px no-repeat, var(--uc-tr) right 4px top 4px / 52px no-repeat,
+    var(--uc-bl) left 4px bottom 4px / 52px no-repeat, var(--uc-br) right 4px bottom 4px / 52px no-repeat;
+}
+.gold-dust i { background: #ffe9a8; box-shadow: 0 0 8px 2px rgba(255, 200, 90, 0.9); }
+.envelope__eyebrow, .envelope__hint { color: var(--ugold-light); }
+.envelope__line { color: #f7dcc0; }
+.envelope__names .amp { color: var(--marigold); }
+
+.env { filter: drop-shadow(0 4px 4px rgba(var(--warm-shadow), 0.35)) drop-shadow(0 20px 26px rgba(var(--warm-shadow), 0.45)); }
+.env__back {
+  background: var(--buti) 0 0 / 36px 36px, linear-gradient(#c21b33, #8f0d22);
+  box-shadow: 0 46px 70px -26px rgba(var(--warm-shadow), 0.7), inset 0 0 0 1.5px var(--ugold), inset 0 2px 0 rgba(255, 220, 160, 0.3);
+}
+.env__letter {
+  background: linear-gradient(var(--cream), var(--cream-deep));
+  color: var(--uink);
+  box-shadow: inset 0 0 0 1px var(--ugold), inset 0 0 0 5px var(--cream), inset 0 0 0 6px rgba(179, 18, 42, 0.55), 0 -6px 14px rgba(var(--warm-shadow), 0.3);
+}
+.env__letter-date { color: var(--sindoor); }
+.env__pocket {
+  background:
+    linear-gradient(to top right, transparent 49.4%, rgba(138, 90, 18, 0.5) 50%, transparent 50.8%) left bottom / 50% 100% no-repeat,
+    linear-gradient(to top left, transparent 49.4%, rgba(138, 90, 18, 0.5) 50%, transparent 50.8%) right bottom / 50% 100% no-repeat,
+    radial-gradient(ellipse at 50% 100%, #fff8e8, #fbe8c4 60%, #f2d39a);
+  box-shadow:
+    inset 0 0 0 1.5px var(--ugold),
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -4px 6px rgba(var(--warm-shadow), 0.18),
+    inset 0 0 26px rgba(var(--warm-shadow), 0.12);
+}
+.env__flap {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 200, 140, 0.25), transparent 60%),
+    var(--buti) 0 0 / 36px 36px,
+    linear-gradient(#d22a40, #a3122a 70%, #8a0d22);
+  filter: drop-shadow(0 2px 0 var(--ugold)) drop-shadow(0 5px 4px rgba(var(--warm-shadow), 0.45)) drop-shadow(0 12px 14px rgba(var(--warm-shadow), 0.3));
+}
+@media (hover: hover) {
+  .env:hover { filter: drop-shadow(0 6px 6px rgba(var(--warm-shadow), 0.35)) drop-shadow(0 30px 34px rgba(var(--warm-shadow), 0.5)); }
+}
+.wax svg { filter: drop-shadow(0 2px 2px rgba(var(--warm-shadow), 0.5)) drop-shadow(0 8px 10px rgba(var(--warm-shadow), 0.4)); }
+@keyframes label-glow { 50% { filter: drop-shadow(0 0 14px rgba(255, 200, 90, 0.95)); } }
+@keyframes burst { 0% { opacity: 1; background: rgba(255, 230, 160, 0.95); box-shadow: 0 0 0 0 rgba(255, 190, 80, 0.9); } 100% { opacity: 0; box-shadow: 0 0 80px 60px rgba(255, 190, 80, 0); } }
+
+/* =========================================================
+   CURTAINS — sindoor silk with gold zari and marigold trim
+   ========================================================= */
+.curtain {
+  background:
+    linear-gradient(180deg, rgba(40, 0, 6, 0.35), transparent 18%, transparent 80%, rgba(40, 0, 6, 0.4)),
+    repeating-linear-gradient(90deg, rgba(60, 0, 10, 0.45) 0, rgba(255, 90, 90, 0.18) 20px, rgba(255, 120, 110, 0.28) 27px, rgba(60, 0, 10, 0.42) 52px),
+    linear-gradient(90deg, #8f0d22, #c41a32 50%, #8f0d22);
+  box-shadow: 0 0 30px rgba(var(--warm-shadow), 0.6);
+}
+.curtain::before {
+  height: 16px;
+  border-top: 2px solid var(--ugold);
+  background: var(--rail-ladi) 0 50% / 16px 30px repeat-x;
+  background-size: 15px 28px;
+}
+.curtain::after { width: 14px; background: var(--rail-ladi) 50% 0 / 14px 26px repeat-y; }
+.curtain__tie { background: linear-gradient(var(--ugold-light), var(--ugold) 50%, var(--ugold-deep)); filter: drop-shadow(0 3px 3px rgba(var(--warm-shadow), 0.5)); }
+.curtains__valance {
+  background:
+    radial-gradient(ellipse 60px 34px at 60px 0, #c41a32 98%, transparent 100%) 0 0 / 120px 70px repeat-x,
+    linear-gradient(#8f0d22, #b3122a);
+  filter: drop-shadow(0 3px 0 var(--ugold)) drop-shadow(0 5px 4px rgba(var(--warm-shadow), 0.5));
+}
+.curtains__light { background: radial-gradient(ellipse at center, rgba(255, 246, 210, 0.95), rgba(255, 190, 90, 0.55) 40%, transparent 70%); }
+
+/* =========================================================
+   COVER — names on sindoor velvet under a marigold toran,
+   temple, kalash and diyas below
+   ========================================================= */
+.cover { background: var(--velvet); }
+@media (min-width: 700px) {
+  .cover { background: var(--velvet); }
+  .cover__scene {
+    box-shadow: 0 0 0 5px var(--sindoor), 0 0 0 6px var(--ugold), 0 2px 4px 6px rgba(20, 0, 4, 0.2), 0 30px 60px rgba(20, 0, 4, 0.55);
+  }
+}
+.cover__panel, .js .cover__panel { color: var(--cream); }
+.cover__eyebrow { color: var(--ugold-light); }
+.cover__names .amp { color: var(--marigold); }
+.orn--plaque { color: var(--ugold); }
+.cover__date { color: #fbe2c0; }
+.cover__venue { color: var(--haldi); }
+.cover__cue { color: var(--ugold-light); }
+.cover__cue i { background: linear-gradient(var(--ugold-light), transparent); }
+.cover__svg .flame { animation: flicker 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes flicker { 0%, 100% { scale: 1 1; opacity: 1; } 40% { scale: 0.88 1.1; opacity: 0.9; } 70% { scale: 1.06 0.94; opacity: 1; } }
+.cover__svg .flag { animation: flutter 3s ease-in-out infinite; transform-box: fill-box; transform-origin: 0 50%; }
+@keyframes flutter { 0%, 100% { scale: 1 1; } 50% { scale: 0.86 1.06; } }
+
+/* =========================================================
+   TILES — cream cards, sindoor & gold double border,
+   marigold-corner motifs, kalash-leaf crest
+   ========================================================= */
+.tile {
+  color: var(--uink);
+  border: 1.5px solid var(--sindoor);
+  background:
+    var(--uc-tl) left 9px top 9px / 40px no-repeat, var(--uc-tr) right 9px top 9px / 40px no-repeat,
+    var(--uc-bl) left 9px bottom 9px / 40px no-repeat, var(--uc-br) right 9px bottom 9px / 40px no-repeat,
+    radial-gradient(ellipse at 50% 0%, #fffbf0, transparent 70%),
+    linear-gradient(var(--cream), var(--cream-deep));
+  box-shadow:
+    0 0 0 4px var(--cream),
+    0 0 0 5.5px var(--ugold),
+    0 2px 3px 5px rgba(var(--warm-shadow), 0.12),
+    0 14px 24px 2px rgba(var(--warm-shadow), 0.2),
+    0 32px 52px -10px rgba(var(--warm-shadow), 0.45),
+    inset 0 1px 0 #fff;
+}
+.tile::after { border-color: rgba(217, 165, 60, 0.6); }
+.tile::before { background: var(--crest-marigold) center bottom / contain no-repeat; }
+@media (hover: hover) {
+  .js .tile.reveal.is-in:hover {
+    box-shadow:
+      0 0 0 4px var(--cream), 0 0 0 5.5px var(--ugold),
+      0 4px 6px 5px rgba(var(--warm-shadow), 0.12), 0 22px 32px 4px rgba(var(--warm-shadow), 0.22), 0 44px 70px -10px rgba(var(--warm-shadow), 0.5),
+      inset 0 1px 0 #fff;
+  }
+}
+
+.host__blessing { color: var(--sindoor); }
+.host__parents { color: var(--uink); }
+.host__invite, .host__to { color: var(--uink-soft); }
+.host__name { color: var(--sindoor); }
+.facts li { color: var(--uink); }
+.facts svg { color: var(--saffron); }
+.facts__hall { color: var(--sindoor); }
+.dress { border-top-color: rgba(217, 165, 60, 0.6); }
+.dress__label { color: var(--ugold-deep); }
+.dress__value { color: var(--sindoor); }
+.countdown span { color: var(--sindoor); }
+.countdown small { color: var(--uink-soft); }
+.countdown div + div { border-left-color: rgba(217, 165, 60, 0.6); }
+.timeline { border-top-color: rgba(217, 165, 60, 0.6); }
+.timeline li::before { background: radial-gradient(circle at 35% 35%, #ffd27a, var(--marigold) 55%, #c4560c); box-shadow: 0 0 0 1px rgba(196, 86, 12, 0.4); }
+.timeline__time { color: var(--ugold-deep); }
+.timeline__label { color: var(--uink-soft); }
+
+.rsvp__welcome { color: var(--sindoor); }
+.rsvp__msg, .rsvp__label, .contact__phone a { color: var(--uink); }
+.contact__name { color: var(--sindoor); }
+
+.btn {
+  color: var(--cream);
+  border: 1px solid var(--ugold);
+  background: linear-gradient(#c41a32, #93101f);
+  box-shadow: 0 2px 4px rgba(var(--warm-shadow), 0.25), inset 0 1px 0 rgba(255, 200, 160, 0.4);
+}
+.btn svg { color: var(--haldi); }
+.btn:active { background: #8a0d22; }
+@media (hover: hover) { .btn:hover { background: linear-gradient(#d22a40, #a3122a); border-color: var(--ugold-light); } }
+.btns--links .btn { color: var(--sindoor); background: none; text-decoration-color: var(--marigold); }
+.btns--links .btn svg { color: var(--saffron); }
+@media (hover: hover) { .btns--links .btn:hover { background: none; color: var(--sindoor-deep); } }
+.contact .btn {
+  color: var(--cream);
+  border: 1px solid var(--ugold);
+  background: linear-gradient(#c41a32, #93101f);
+  box-shadow: 0 1px 2px rgba(var(--warm-shadow), 0.25), inset 0 1px 0 rgba(255, 200, 160, 0.35);
+}
+.contact .btn svg { color: var(--haldi); }
+@media (hover: hover) { .contact .btn:hover { background: linear-gradient(#d22a40, #a3122a); border-color: var(--ugold-light); } }
+
+/* closing — sits straight on the velvet */
+.closing__names { color: var(--cream); }
+.closing__names .amp { color: var(--marigold); }
+.env__letter-names .amp { color: var(--sindoor); }
+.closing__date { color: var(--haldi); }
+.closing__signoff { color: #fbe2c0; }
+.closing__top { color: var(--ugold-light); }
+
+.music { background: rgba(94, 11, 26, 0.85); color: var(--haldi); border-color: var(--ugold); }
+
+/* =========================================================
+   3D NAMES — gold leaf raised off the velvet; sindoor
+   lettering pressed into the cream cards
+   ========================================================= */
+.envelope__names,
+.cover__names span:not(.amp),
+.closing__names {
+  color: #ffe9b0;
+  text-shadow:
+    0 -1px 0 rgba(255, 250, 225, 0.6),
+    0 1px 0 #c8902e,
+    0 2px 0 #a8741f,
+    0 3px 0 #85561a,
+    0 4px 2px rgba(40, 0, 6, 0.6),
+    0 8px 14px rgba(30, 0, 5, 0.55),
+    0 0 26px rgba(255, 170, 60, 0.25);
+}
+.env__letter-names {
+  color: var(--uink);
+  text-shadow: 0 -1px 0 #fff, 0 1px 0 rgba(150, 70, 40, 0.5), 0 3px 6px rgba(var(--warm-shadow), 0.25);
+}
+.host__name {
+  text-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.95),
+    0 1px 0 rgba(140, 20, 30, 0.6),
+    0 2px 0 rgba(110, 10, 25, 0.4),
+    0 5px 8px rgba(80, 0, 15, 0.28);
+}
+.cover__names .amp, .envelope__names .amp, .closing__names .amp {
+  text-shadow: 0 1px 0 #a8501a, 0 3px 6px rgba(30, 0, 5, 0.55);
+}
+
+/* =========================================================
+   PETALS — marigold, rose, haldi and jasmine
+   ========================================================= */
+.shower__p { box-shadow: inset -2px -3px 4px rgba(var(--warm-shadow), 0.25), inset 2px 2px 3px rgba(255, 255, 255, 0.45); }
+.shower__p--marigold { background: radial-gradient(ellipse at 45% 30%, #ffd27a, #f59a1b 50%, #c4560c); }
+.shower__p--haldi { background: radial-gradient(ellipse at 45% 30%, #fff0a0, #f8c62e 50%, #c98a0c); }
+.shower__p--rose { background: radial-gradient(ellipse at 45% 30%, #ff6b72, #d0182e 50%, #8e0a1c); }
+.shower__p--jasmine { background: radial-gradient(ellipse at 45% 30%, #fffdf6, #fbf1dc 55%, #e8d6b0); }

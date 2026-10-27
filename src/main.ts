@@ -8,6 +8,7 @@ import '@fontsource/eb-garamond/latin-600.css';
 import '@fontsource/eb-garamond/latin-500-italic.css';
 import '@fontsource/prata/latin-400.css';
 import '@fontsource/great-vibes/latin-400.css';
+import '@fontsource/tiro-devanagari-hindi/devanagari-400.css'; // ॥ श्री गणेशाय नमः ॥ & shlokas on the opening page
 import './styles/uris.css';
 import './styles/heritage-uris.css';
 import '@fontsource/cinzel/latin-500.css';
@@ -19,6 +20,8 @@ import '@fontsource/cormorant-garamond/latin-500-italic.css';
 import '@fontsource/cormorant-garamond/latin-600.css';
 import './styles/blush-uris.css';
 import './styles/blush.css';
+import './styles/utsav-uris.css';
+import './styles/utsav.css';
 
 declare global {
   interface Window {
@@ -27,6 +30,8 @@ declare global {
 }
 
 const root = document.documentElement;
+/** Ganesha page (#top) and the names cover both fade in once the envelope opens. */
+const revealOpening = () => document.querySelectorAll('#top, #cover').forEach((el) => el.classList.add('is-revealed'));
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 window.__inviteReady = true;
 
@@ -56,7 +61,7 @@ function initEnvelope(): void {
       main?.removeAttribute('aria-hidden');
       env.remove();
       document.querySelector('.curtains')?.remove();
-      document.getElementById('top')?.classList.add('is-revealed');
+      revealOpening();
     };
     if (reduceMotion.matches) {
       window.setTimeout(done, 300);
@@ -68,7 +73,7 @@ function initEnvelope(): void {
     window.setTimeout(() => {
       root.classList.add('curtain-open');
       window.scrollTo(0, 0);
-      document.getElementById('top')?.classList.add('is-revealed');
+      revealOpening();
       showerPetals();
     }, 2400);
     window.setTimeout(done, 4700);
@@ -88,7 +93,7 @@ function initEnvelope(): void {
 }
 
 /* ---------------- Petal & gold-leaf shower ----------------
- * Starts as the palace doors open and keeps falling gently for the whole
+ * Starts as the curtains part and keeps falling gently for the whole
  * invitation. Density is 20% higher than the original opening burst
  * (34 → 41 petals on phones, 56 → 67 on larger screens). Each petal loops
  * forever on the GPU (transform/opacity only), so no JavaScript runs after start.
@@ -99,7 +104,7 @@ function showerPetals(): void {
   const box = document.createElement('div');
   box.className = 'shower';
   box.setAttribute('aria-hidden', 'true');
-  const kinds = ['blush', 'ivory', 'dusty', 'blush', 'lav', 'ivory', 'blush']; // blush, ivory & a few lavender petals
+  const kinds = ['marigold', 'rose', 'haldi', 'marigold', 'jasmine', 'rose', 'marigold']; // marigold, rose, haldi & a few jasmine petals
   for (let i = 0; i < count; i++) {
     const p = document.createElement('i');
     p.className = `shower__p shower__p--${kinds[i % kinds.length]}`;
@@ -276,7 +281,7 @@ initReveal();
 initCountdown();
 initMusic();
 if (!document.getElementById('envelope')) {
-  document.getElementById('top')?.classList.add('is-revealed');
+  revealOpening();
   showerPetals();
   document.querySelector('.curtains')?.remove();
 }

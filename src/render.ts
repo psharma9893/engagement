@@ -1,8 +1,9 @@
 /**
  * Pure HTML renderers — run at BUILD TIME (vite.config.ts) so the invite is
  * pre-rendered into index.html. main.ts only adds motion & interactivity.
- * Theme: "Blush & Pearl" — embroidered blush linen, ivory drapes with pearl trim,
- * dusty-rose roses, lavender wisteria, soft gold lines, charcoal type (Cormorant Garamond).
+ * Theme: "Sindoor & Marigold" — sindoor red and maroon, marigold torans, a stone
+ * shikhara temple with purna kalash and diyas, rich gold lines (Cormorant Garamond).
+ * Opens on Shri Ganesha with the same shlokas as the wedding invite.
  */
 import { config as C } from './data/config';
 
@@ -15,10 +16,6 @@ const names = `${A} &amp; ${B}`;
 const digits = (p: string) => p.replace(/[^\d]/g, '');
 const nb = (s: string) => `<span class="nb">${esc(s)}</span>`;
 const pairs = (s: string) => s.split(' & ').map((p, i, all) => `<span class="nb">${esc(p)}${i < all.length - 1 ? ' &amp;' : ''}</span>`).join(' ');
-
-/* ---------- seeded random so the build is deterministic ---------- */
-let seed = 7;
-const rnd = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
 
 /* ---------- small ornaments ---------- */
 const orn = (cls = ''): string =>
@@ -39,143 +36,167 @@ const icon = {
   ring: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="14.5" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9.5 4.5h5l1.5 2.5-4 3.5-4-3.5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>',
 };
 
-/* ---------- blush cartouche label (replaces the wax seal) ---------- */
+/* ---------- sindoor cartouche label (replaces the wax seal) ---------- */
 const LABEL = 'M22 8C35 8 40 2 50 2 60 2 65 8 78 8Q80 20 92 22L92 44C98 52 98 68 92 76L92 98Q80 100 78 112C65 112 60 118 50 118 40 118 35 112 22 112Q20 100 8 98L8 76C2 68 2 52 8 44L8 22Q20 20 22 8Z';
 let sealId = 0;
-/** Scalloped blush label with a gold scroll border and the couple's initials, like the reel's monogram tag. */
+/** Scalloped sindoor-red label with a gold scroll border and the couple's initials, like the reel's monogram tag. */
 function waxSeal(cls: string, attrs = ''): string {
   const id = `lbl${++sealId}`;
-  const scroll = (t: string) => `<g transform="${t}"><path d="M0 0c0-6 7-8 10-4 2 3-1 6-4 5" fill="none" stroke="#a97f3c" stroke-width="1.3" stroke-linecap="round"/><circle cx="12" cy="-6" r="1.3" fill="#a97f3c"/></g>`;
+  const scroll = (t: string) => `<g transform="${t}"><path d="M0 0c0-6 7-8 10-4 2 3-1 6-4 5" fill="none" stroke="#f0c45a" stroke-width="1.3" stroke-linecap="round"/><circle cx="12" cy="-6" r="1.3" fill="#f0c45a"/></g>`;
   return `<span class="${cls} wax label-seal" ${attrs}><svg viewBox="0 0 100 120" aria-hidden="true" focusable="false"><defs>
-<radialGradient id="${id}a" cx="38%" cy="28%" r="85%"><stop offset="0" stop-color="#f4d8d8"/><stop offset=".55" stop-color="#e5b8ba"/><stop offset="1" stop-color="#cd959b"/></radialGradient>
-<linearGradient id="${id}g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0bf7a"/><stop offset=".5" stop-color="#a97f3c"/><stop offset="1" stop-color="#7d5c26"/></linearGradient>
-<linearGradient id="${id}t" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#957035"/><stop offset="1" stop-color="#523a18"/></linearGradient></defs>
-<path d="${LABEL}" fill="url(#${id}a)" stroke="#bd8c91" stroke-width="1"/>
-<path d="${LABEL}" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="1" transform="translate(-.6 -.8)"/>
+<radialGradient id="${id}a" cx="38%" cy="28%" r="85%"><stop offset="0" stop-color="#e2384c"/><stop offset=".55" stop-color="#b3122a"/><stop offset="1" stop-color="#7a0a1c"/></radialGradient>
+<linearGradient id="${id}g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe7a3"/><stop offset=".5" stop-color="#e0b04a"/><stop offset="1" stop-color="#b08226"/></linearGradient>
+<linearGradient id="${id}t" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset="1" stop-color="#e0b04a"/></linearGradient></defs>
+<path d="${LABEL}" fill="url(#${id}a)" stroke="#5c0614" stroke-width="1"/>
+<path d="${LABEL}" fill="none" stroke="#ffb3a0" stroke-opacity=".5" stroke-width="1" transform="translate(-.6 -.8)"/>
 <path d="${LABEL}" fill="none" stroke="url(#${id}g)" stroke-width="1.6" transform="translate(50 60) scale(.84) translate(-50 -60)"/>
-<path d="${LABEL}" fill="none" stroke="#a97f3c" stroke-opacity=".55" stroke-width=".7" transform="translate(50 60) scale(.76) translate(-50 -60)"/>
+<path d="${LABEL}" fill="none" stroke="#f0c45a" stroke-opacity=".55" stroke-width=".7" transform="translate(50 60) scale(.76) translate(-50 -60)"/>
 ${scroll('translate(22 24)')}${scroll('translate(78 24) scale(-1 1)')}${scroll('translate(22 96) scale(1 -1)')}${scroll('translate(78 96) scale(-1 -1)')}
-<path d="M42 12q8 -5 16 0" fill="none" stroke="#a97f3c" stroke-width="1.2" stroke-linecap="round"/><circle cx="50" cy="9" r="1.6" fill="#a97f3c"/>
-<path d="M42 108q8 5 16 0" fill="none" stroke="#a97f3c" stroke-width="1.2" stroke-linecap="round"/><circle cx="50" cy="111" r="1.6" fill="#a97f3c"/>
+<path d="M42 12q8 -5 16 0" fill="none" stroke="#f0c45a" stroke-width="1.2" stroke-linecap="round"/><circle cx="50" cy="9" r="1.6" fill="#f0c45a"/>
+<path d="M42 108q8 5 16 0" fill="none" stroke="#f0c45a" stroke-width="1.2" stroke-linecap="round"/><circle cx="50" cy="111" r="1.6" fill="#f0c45a"/>
 <g font-family="'Cormorant Garamond', Georgia, serif" font-weight="500" text-anchor="middle" font-size="27">
-<text x="50" y="70.6" fill="#fff" fill-opacity=".85">${esc(A[0])}<tspan font-style="italic" font-size="20" dx="1">&amp;</tspan><tspan dx="1">${esc(B[0])}</tspan></text>
+<text x="50" y="71.2" fill="#4a0510" fill-opacity=".7">${esc(A[0])}<tspan font-style="italic" font-size="20" dx="1">&amp;</tspan><tspan dx="1">${esc(B[0])}</tspan></text>
 <text x="50" y="70" fill="url(#${id}t)">${esc(A[0])}<tspan font-style="italic" font-size="20" dx="1">&amp;</tspan><tspan dx="1">${esc(B[0])}</tspan></text></g></svg></span>`;
 }
 
-/* ---------- cover scene: embroidered blush linen, pearl-trimmed drapes, ivory palace, wisteria & roses ---------- */
-const STITCH = 'stroke="#c7b3a2" stroke-width="1" stroke-dasharray="3 2"';
-/** a string of pearls along any path: soft shadow, pearl body, highlight */
-const pearls = (d: string, w = 5.2, gap = 8): string =>
-  `<path d="${d}" fill="none" stroke="#a8978a" stroke-opacity=".45" stroke-width="${w}" stroke-dasharray="0 ${gap}" stroke-linecap="round" transform="translate(.7 1.3)"/><path d="${d}" fill="none" stroke="#efe6dc" stroke-width="${w}" stroke-dasharray="0 ${gap}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#fff" stroke-width="${(w * 0.4).toFixed(1)}" stroke-dasharray="0 ${gap}" stroke-linecap="round" transform="translate(-.8 -.9)"/>`;
-function leaf(x: number, y: number, a: number, s = 1): string {
-  return `<path transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${a.toFixed(0)}) scale(${s})" d="M0 0C6-6 16-6 22 0 16 6 6 6 0 0Z" fill="#6c7c52" stroke="#4f5843" stroke-width=".7"/>`;
-}
-const ROSE_TONES = ['roseD', 'roseI', 'roseB'];
-function rose(cx: number, cy: number, r: number, tone: string): string {
-  const k = tone === 'roseI' ? '#c9b7a8' : tone === 'roseB' ? '#ab7077' : '#6c3245';
-  return `<g><circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#${tone})"/><path d="M${cx + r * 0.1} ${cy}a${r * 0.22} ${r * 0.22} 0 1 1 ${-r * 0.3} 0a${r * 0.42} ${r * 0.42} 0 1 1 ${r * 0.62} ${r * 0.1}a${r * 0.66} ${r * 0.66} 0 1 1 ${-r * 1.0} ${-r * 0.18}" fill="none" stroke="${k}" stroke-width="${(r * 0.1).toFixed(1)}" stroke-linecap="round"/><path d="M${cx - r * 0.9} ${cy + r * 0.25}a${r} ${r} 0 0 0 ${r * 1.8} 0" fill="none" stroke="${k}" stroke-opacity=".6" stroke-width="${(r * 0.08).toFixed(1)}"/></g>`;
-}
-function wisteria(x: number, y: number, len: number): string {
-  const rows = Math.round(len / 7);
-  let out = `<path d="M${x} ${y}q4 ${len * 0.4} ${(rnd() - 0.5) * 8} ${len}" fill="none" stroke="#5b6848" stroke-width="1"/>`;
-  for (let i = 0; i < rows; i++) {
-    const t = i / rows;
-    const r = 4.4 * (1 - t * 0.62);
-    const cy = y + 4 + i * 7;
-    const shades = ['#9677b8', '#7a5a9e', '#634583', '#a88ec8'];
-    for (let j = -1; j <= 1; j++) {
-      if (t > 0.75 && j !== 0) continue;
-      out += `<circle cx="${(x + j * r * 1.2 + (rnd() - 0.5) * 2).toFixed(1)}" cy="${(cy + Math.abs(j) * 2).toFixed(1)}" r="${r.toFixed(1)}" fill="${shades[Math.floor(rnd() * shades.length)]}" stroke="#50386b" stroke-opacity=".35" stroke-width=".6"/>`;
-    }
-  }
-  return out + leaf(x, y + 2, 160, 0.8) + leaf(x, y + 2, 20, 0.8);
-}
-function chhatri(cx: number, base: number, w: number): string {
-  const h = w * 1.55;
+/* ---------- cover scene: sindoor-red night, marigold torans, a stone shikhara temple, purna kalash & diyas ---------- */
+type Pt = [number, number];
+/** n+1 points along a quadratic curve a → b, pulled towards c */
+const along = (a: Pt, c: Pt, b: Pt, n: number): Pt[] =>
+  Array.from({ length: n + 1 }, (_, i) => {
+    const t = i / n;
+    const u = 1 - t;
+    return [u * u * a[0] + 2 * u * t * c[0] + t * t * b[0], u * u * a[1] + 2 * u * t * c[1] + t * t * b[1]] as Pt;
+  });
+/** marigold garland: orange, orange, yellow flower beads */
+const garland = (pts: Pt[], s = 1): string =>
+  pts.map(([x, y], i) => `<use href="#${i % 3 === 2 ? 'mgY' : 'mgO'}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${s})"/>`).join('');
+/** a hanging marigold string (ladi) ending in a temple bell; swings gently */
+const ladi = (x: number, y0: number, y1: number, s = 1): string =>
+  `<g class="chand">${garland(along([x, y0], [x, (y0 + y1) / 2], [x, y1], Math.round((y1 - y0) / (11 * s))), s)}<use href="#bell" transform="translate(${x} ${y1 + 9 * s}) scale(${s})"/></g>`;
+const mango = (x: number, y: number, a: number, s = 1, alt = false): string =>
+  `<use href="#${alt ? 'mango2' : 'mango'}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${a.toFixed(0)}) scale(${s})"/>`;
+
+/** Nagara-style curvilinear spire (shikhara) with banded courses, a raised central rib and an amalaka on top */
+function shikhara(cx: number, base: number, w: number, h: number, main = false): string {
+  const l = cx - w / 2;
+  const r = cx + w / 2;
   const top = base - h;
-  const domeY = top + w * 0.55;
-  const cols = [0.12, 0.38, 0.62, 0.88]
-    .map((f) => `<rect x="${(cx - w / 2 + f * w - 3).toFixed(1)}" y="${(domeY + 14).toFixed(1)}" width="6" height="${(base - domeY - 26).toFixed(1)}" fill="url(#stoneG)" stroke="#c7b3a2" stroke-width=".8"/>`)
+  const d = `M${l} ${base}C${l - w * 0.01} ${base - h * 0.42} ${l + w * 0.14} ${base - h * 0.8} ${cx - w * 0.2} ${top}L${cx + w * 0.2} ${top}C${r - w * 0.14} ${base - h * 0.8} ${r + w * 0.01} ${base - h * 0.42} ${r} ${base}Z`;
+  const squeeze = (k: number) => `transform="translate(${cx} 0) scale(${k} 1) translate(${-cx} 0)"`;
+  const courses = Array.from({ length: Math.floor(h / 12) }, (_, k) => `M${l - 4} ${(top + 8 + k * 12).toFixed(1)}H${r + 4}`).join('');
+  const clip = `sk${cx}`;
+  const ribs = Array.from({ length: 9 }, (_, k) => `<path d="M${(cx - w * 0.2 + (k * w * 0.4) / 8).toFixed(1)} ${top}v-${(w * 0.05).toFixed(1)}" stroke="#8a4a14" stroke-width="1"/>`).join('');
+  return `<g filter="url(#raise)"><clipPath id="${clip}"><path d="${d}"/></clipPath>
+<path d="${d}" fill="url(#stoneG)" stroke="#7a3a0c" stroke-width="1.2"/>
+<path d="${d}" fill="#fff2c4" fill-opacity=".28" ${squeeze(0.34)}/>
+<path d="${d}" fill="none" stroke="#8a4a14" stroke-opacity=".55" stroke-width="1" ${squeeze(0.68)}/>
+<path d="${d}" fill="none" stroke="#8a4a14" stroke-opacity=".55" stroke-width="1" ${squeeze(0.34)}/>
+<path d="${courses}" clip-path="url(#${clip})" stroke="#8a4a14" stroke-opacity=".42" stroke-width="1.3"/>
+<ellipse cx="${cx}" cy="${top - w * 0.05}" rx="${w * 0.25}" ry="${w * 0.07}" fill="url(#goldG)" stroke="#7a3a0c" stroke-width="1"/>${ribs}
+<circle cx="${cx}" cy="${top - w * 0.15}" r="${w * 0.05}" fill="url(#goldG)" stroke="#7a3a0c" stroke-width=".8"/>
+<path d="M${cx} ${top - w * 0.2}v-${w * 0.08}" stroke="#b68427" stroke-width="${main ? 2 : 1.4}"/>
+${main ? `<path d="M${cx} ${top - 12}V${top - 66}" stroke="#8a5a12" stroke-width="1.6"/><path class="flag" d="M${cx} ${top - 66}Q${cx + 22} ${top - 62} ${cx + 44} ${top - 54}Q${cx + 22} ${top - 49} ${cx} ${top - 42}Z" fill="#ff8a1f" stroke="#c4560c" stroke-width=".8"/>` : ''}</g>`;
+}
+
+/** purna kalash: brass pot with mango leaves, a coconut and red mauli thread */
+function kalash(x: number, base: number, s: number): string {
+  const leaves = [-64, -32, 64, 32, 0].map((a, i) => mango(0, -62, 180 + a, 1.05, i % 2 === 1)).join('');
+  return `<g filter="url(#raise)" transform="translate(${x} ${base}) scale(${s})">
+<ellipse cy="-2" rx="22" ry="5" fill="#6b2a0c"/>${leaves}
+<path d="M-13-5C-36-12-38-48-13-58H13C38-48 36-12 13-5Z" fill="url(#potG)" stroke="#6b2a0c" stroke-width="1"/>
+<rect x="-14" y="-66" width="28" height="9" rx="3" fill="url(#goldG)" stroke="#6b2a0c" stroke-width=".8"/>
+<path d="M-31-35Q0-28 31-35" fill="none" stroke="#c8102e" stroke-width="3.4"/><path d="M-31-31Q0-24 31-31" fill="none" stroke="#f6c445" stroke-width="1.3"/>
+<circle cy="-46" r="5" fill="#c8102e"/><circle cy="-46" r="2" fill="#f6c445"/>
+<ellipse cy="-80" rx="13" ry="16" fill="url(#cocoG)" stroke="#3d220c" stroke-width=".8"/>
+<path d="M-8-90q8 6 16 0M-10-83q10 6 20 0" fill="none" stroke="#3d220c" stroke-opacity=".5" stroke-width=".8"/>
+<path d="M-13-73q13 6 26 0" fill="none" stroke="#c8102e" stroke-width="2.6"/></g>`;
+}
+
+/** a few loose flowers heaped at the foot of the temple */
+const heap = (x: number, y: number, flip = 1): string =>
+  [[0, 0, 1.3, 'mgO'], [16, 4, 1.1, 'mgR'], [-15, 5, 1.05, 'mgY'], [6, 10, 1.15, 'mgY'], [-4, 13, 1, 'mgR'], [26, 12, 1, 'mgO']]
+    .map(([dx, dy, s, k]) => `<use href="#${k}" transform="translate(${x + (dx as number) * flip} ${y + (dy as number)}) scale(${s})"/>`)
     .join('');
-  return `<g filter="url(#raise)"><path d="M${cx} ${top - 14}v14" stroke="#a97f3c" stroke-width="2"/><circle cx="${cx}" cy="${top - 16}" r="3" fill="#a97f3c"/>
-<path d="M${cx - w * 0.42} ${domeY}C${cx - w * 0.42} ${top + 6} ${cx + w * 0.42} ${top + 6} ${cx + w * 0.42} ${domeY}Z" fill="url(#stoneG)" stroke="#c7b3a2" stroke-width="1.2"/>
-${Array.from({ length: 5 }, (_, k) => `<path d="M${cx - w * 0.42 + (k + 1) * (w * 0.84) / 6} ${domeY}Q${cx} ${top + 4} ${cx} ${top + 4}" fill="none" stroke="#c7b3a2" stroke-opacity=".6" stroke-width=".7"/>`).join('')}
-<rect x="${cx - w / 2}" y="${domeY}" width="${w}" height="12" fill="url(#stoneG)" stroke="#c7b3a2" stroke-width="1"/>
-<rect x="${cx - w / 2 + 6}" y="${domeY + 12}" width="${w - 12}" height="${base - domeY - 24}" fill="#b47f85" fill-opacity=".55"/>
-${cols}<rect x="${cx - w / 2 - 4}" y="${base - 12}" width="${w + 8}" height="12" fill="url(#stoneG)" stroke="#c7b3a2" stroke-width="1"/></g>`;
-}
-function drape(): string {
-  // left drape; the right one is its mirror image
-  const edge = 'M205 34C196 150 160 300 116 420C106 455 122 520 150 590';
-  const folds = [20, 58, 96, 134, 170]
-    .map((x, i) => `<path d="M${x} 34C${x - 4} 160 ${92 + i * 4} 300 ${96 + i * 4} 422C${92 + i * 6} 470 ${40 + i * 22} 540 ${20 + i * 26} 592" fill="none" stroke="#d6c6b8" stroke-width="2.2"/><path d="M${x + 7} 34C${x + 3} 160 ${98 + i * 4} 300 ${100 + i * 4} 422C${98 + i * 6} 470 ${48 + i * 22} 540 ${28 + i * 26} 594" fill="none" stroke="#fffaf4" stroke-width="1.4"/>`)
-    .join('');
-  return `<g filter="url(#raise)"><path d="M0 28L205 28C196 150 160 300 116 420C106 455 122 520 150 590C110 600 50 600 0 594Z" fill="url(#drapeG)"/>${folds}
-${pearls(edge)}<ellipse cx="108" cy="428" rx="26" ry="9" fill="none" stroke="#efe6dc" stroke-width="5" stroke-dasharray="0 7" stroke-linecap="round"/>
-<path d="M90 432q-4 22 -2 40M98 434q-2 20 0 34" fill="none" stroke="#efe6dc" stroke-width="4" stroke-dasharray="0 6.5" stroke-linecap="round"/></g>`;
-}
-function swags(): string {
-  let out = '<g filter="url(#raise)"><rect x="0" y="16" width="600" height="20" fill="url(#drapeG)"/><path d="M0 36H600" stroke="#c7b3a2" stroke-width="1"/>';
-  for (const [a, b] of [[0, 200], [200, 400], [400, 600]]) {
-    out += `<path d="M${a} 34C${a + 40} 122 ${b - 40} 122 ${b} 34Z" fill="url(#swagG)"/>`;
-    for (const dep of [58, 78, 96]) out += `<path d="M${a + 10} 36C${a + 50} ${dep + 12} ${b - 50} ${dep + 12} ${b - 10} 36" fill="none" stroke="#d6c6b8" stroke-width="1.6"/>`;
-    out += pearls(`M${a + 4} 38C${a + 42} 120 ${b - 42} 120 ${b - 4} 38`, 4.6, 7.4);
-    out += pearls(`M${a + 2} 40C${a + 40} 150 ${b - 40} 150 ${b - 2} 40`, 3.6, 6.4);
-  }
-  return out + '</g>';
-}
+
 function coverScene(): string {
-  seed = 11;
-  const lace = (y: number, flip: boolean) =>
-    `<g transform="${flip ? `translate(0 ${2 * y}) scale(1 -1)` : ''}"><path d="M0 ${y}${Array.from({ length: 30 }, () => `a10 10 0 0 0 20 0`).join('')}V${y - 30}H0Z" fill="#f6efe9" stroke="#d9c7ba" stroke-width="1"/>${Array.from({ length: 30 }, (_, k) => `<circle cx="${10 + k * 20}" cy="${y + 2}" r="2.2" fill="#e3d0c9"/>`).join('')}<path d="M0 ${y - 8}H600" ${STITCH}/></g>`;
-  // palace (bottom half) — Indian arch & chhatris in ivory stone, blush alcoves
-  const arch = 'M232 930V800A34 34 0 0 1 252 760A34 34 0 0 1 300 736A34 34 0 0 1 348 760A34 34 0 0 1 368 800V930Z';
-  const win = (x: number) => `<path d="M${x - 22} 900V842A22 22 0 0 1 ${x + 22} 842V900Z" fill="url(#alcoveG)" stroke="#c7b3a2" stroke-width="1.2"/><path d="M${x - 22} 900V842A22 22 0 0 1 ${x + 22} 842V900" fill="url(#jaali)"/><path d="M${x - 26} 902h52" stroke="#c7b3a2" stroke-width="3"/>`;
-  const merlons = Array.from({ length: 13 }, (_, k) => `<path d="M${168 + k * 22} 706v-8a6 6 0 0 1 12 0v8Z" fill="url(#stoneG)" stroke="#c7b3a2" stroke-width=".8"/>`).join('');
-  const roses = [
-    [62, 952, 22], [104, 972, 18], [146, 950, 20], [190, 975, 16], [232, 958, 19], [270, 980, 15], [330, 980, 15], [368, 958, 19], [410, 975, 16], [454, 950, 20], [496, 972, 18], [538, 952, 22], [20, 975, 18], [580, 975, 18],
-  ].map(([x, y, r], i) => leaf(x - r * 0.6, y - r * 0.5, 200 + i * 7, 1.1) + leaf(x + r * 0.6, y - r * 0.4, -20 - i * 5, 1.1) + rose(x, y, r, ROSE_TONES[i % 3])).join('');
+  // top toran: gold bar, mango leaves, marigold swags & three short ladis with bells
+  const leaves = Array.from({ length: 30 }, (_, k) => mango(10 + k * 20, 16, (k % 2 ? 6 : -6), 1, k % 2 === 1)).join('');
+  const swags = [[0, 150], [150, 300], [300, 450], [450, 600]].map(([a, b]) => garland(along([a, 22], [(a + b) / 2, 122], [b, 22], 22), 0.95)).join('');
+  const sparkles = [[150, 210], [462, 236], [112, 420], [496, 470], [178, 560], [430, 580], [300, 170]]
+    .map(([x, y], i) => `<path class="spk" style="animation-delay:-${i * 0.6}s" d="M${x} ${y - 6}L${x + 1.4} ${y - 1.4} ${x + 6} ${y} ${x + 1.4} ${y + 1.4} ${x} ${y + 6} ${x - 1.4} ${y + 1.4} ${x - 6} ${y} ${x - 1.4} ${y - 1.4}Z" fill="#ffe39a"/>`)
+    .join('');
+  // faint gold mandala behind the names
+  const petals = (n: number, r0: number, r1: number, wd: number) =>
+    Array.from({ length: n }, (_, k) => `<path transform="rotate(${((360 / n) * k).toFixed(1)})" d="M0 ${-r0}Q${wd} ${-(r0 + r1) / 2} 0 ${-r1}Q${-wd} ${-(r0 + r1) / 2} 0 ${-r0}Z"/>`).join('');
+  const dots = Array.from({ length: 36 }, (_, k) => `<circle transform="rotate(${k * 10})" cy="-196" r="2.2"/>`).join('');
+  // diyas along the front, leaving room for the rangoli
+  const diyas = [86, 120, 154, 188, 222, 378, 412, 446, 480, 514]
+    .map((x, i) => `<use href="#diya" transform="translate(${x} 974)"/><g transform="translate(${x} 970)"><use class="flame" style="animation-delay:-${(i * 0.37).toFixed(2)}s" href="#flame"/></g>`)
+    .join('');
+  const rangoli = `<g transform="translate(300 958) scale(1 .42)">${[['#c8102e', 40], ['#f59a1b', 32], ['#f6c445', 24], ['#2f7d32', 16], ['#fff4dc', 8]]
+    .map(([c, r]) => `<g fill="${c}">${petals(12, (r as number) * 0.4, r as number, (r as number) * 0.32)}</g>`)
+    .join('')}<circle r="4" fill="#c8102e"/></g>`;
+  const pillars = [240, 262, 326, 348]
+    .map((x) => `<rect x="${x}" y="812" width="12" height="80" fill="url(#stoneG)" stroke="#7a3a0c" stroke-width=".8"/><rect x="${x - 2}" y="810" width="16" height="6" fill="url(#goldG)"/><rect x="${x - 2}" y="890" width="16" height="6" fill="url(#goldG)"/>`)
+    .join('');
+  const doorToran = garland(along([282, 828], [300, 842], [318, 828], 6), 0.5) + [284, 291, 298, 305, 312].map((x, i) => mango(x + 2, 826, 0, 0.32, i % 2 === 1)).join('');
   return `<svg class="cover__svg" viewBox="0 0 600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs>
-<linearGradient id="cardG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eed3cb"/><stop offset=".55" stop-color="#e4c3bb"/><stop offset="1" stop-color="#d4ada3"/></linearGradient>
-<pattern id="linen" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0 .5H5M0 3H5" stroke="#fff" stroke-opacity=".35" stroke-width=".6"/><path d="M.5 0V5M3 0V5" stroke="#8a6a64" stroke-opacity=".08" stroke-width=".6"/></pattern>
-<linearGradient id="drapeG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#efe5db"/><stop offset=".5" stop-color="#faf5ef"/><stop offset="1" stop-color="#e9ddd1"/></linearGradient>
-<linearGradient id="swagG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9f3ed"/><stop offset="1" stop-color="#e8dccf"/></linearGradient>
-<radialGradient id="alcoveG" cx="50%" cy="35%" r="80%"><stop offset="0" stop-color="#d6a19f"/><stop offset="1" stop-color="#a66d73"/></radialGradient>
-<linearGradient id="stoneG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf6f0"/><stop offset="1" stop-color="#ebe0d4"/></linearGradient>
-<radialGradient id="roseD" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#c97f90"/><stop offset=".6" stop-color="#9b5268"/><stop offset="1" stop-color="#7a3a4d"/></radialGradient>
-<radialGradient id="roseB" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#f3d6d6"/><stop offset=".6" stop-color="#d9a1a5"/><stop offset="1" stop-color="#bd7d84"/></radialGradient>
-<radialGradient id="roseI" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fffdf9"/><stop offset=".6" stop-color="#f4ece2"/><stop offset="1" stop-color="#dfd1c3"/></radialGradient>
-<pattern id="jaali" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M6 0L12 6 6 12 0 6Z" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width=".8"/></pattern>
-<filter id="raise" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2.2" stdDeviation="1.8" flood-color="#6b4f4a" flood-opacity=".32"/></filter>
+<radialGradient id="bgG" cx="50%" cy="42%" r="75%"><stop offset="0" stop-color="#a3202f"/><stop offset=".5" stop-color="#7a1322"/><stop offset="1" stop-color="#4a0812"/></radialGradient>
+<radialGradient id="glowG"><stop offset="0" stop-color="#ffb648" stop-opacity=".6"/><stop offset=".55" stop-color="#ff8a2a" stop-opacity=".14"/><stop offset="1" stop-color="#ff8a2a" stop-opacity="0"/></radialGradient>
+<pattern id="buti" width="44" height="44" patternUnits="userSpaceOnUse"><g fill="#f0c45a" fill-opacity=".16"><path d="M22 16c1.6 3 3 4.4 6 6-3 1.6-4.4 3-6 6-1.6-3-3-4.4-6-6 3-1.6 4.4-3 6-6Z"/><circle r="1.6"/><circle cx="44" r="1.6"/><circle cy="44" r="1.6"/><circle cx="44" cy="44" r="1.6"/></g></pattern>
+<linearGradient id="goldG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe7a3"/><stop offset=".5" stop-color="#d9a53c"/><stop offset="1" stop-color="#9a6a1c"/></linearGradient>
+<linearGradient id="stoneG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d4873a"/><stop offset=".45" stop-color="#f7cf86"/><stop offset="1" stop-color="#bf7329"/></linearGradient>
+<radialGradient id="doorG" cx="50%" cy="78%" r="80%"><stop offset="0" stop-color="#fff2b0"/><stop offset=".35" stop-color="#ffb23e"/><stop offset="1" stop-color="#9c2a12"/></radialGradient>
+<radialGradient id="mgOg" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#ffd27a"/><stop offset=".55" stop-color="#f59a1b"/><stop offset="1" stop-color="#d0620c"/></radialGradient>
+<radialGradient id="mgYg" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fff0a0"/><stop offset=".55" stop-color="#f8c62e"/><stop offset="1" stop-color="#d79a10"/></radialGradient>
+<radialGradient id="mgRg" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#ff7a68"/><stop offset=".55" stop-color="#d0182e"/><stop offset="1" stop-color="#8e0a1c"/></radialGradient>
+<linearGradient id="leafG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2c6e2a"/><stop offset=".5" stop-color="#4f9a3c"/><stop offset="1" stop-color="#24602a"/></linearGradient>
+<linearGradient id="leafG2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b7f2c"/><stop offset=".5" stop-color="#76b54c"/><stop offset="1" stop-color="#2f6e27"/></linearGradient>
+<radialGradient id="potG" cx="35%" cy="35%" r="75%"><stop offset="0" stop-color="#ffe09a"/><stop offset=".45" stop-color="#e0952e"/><stop offset="1" stop-color="#8f4710"/></radialGradient>
+<radialGradient id="cocoG" cx="40%" cy="30%" r="75%"><stop offset="0" stop-color="#b77a45"/><stop offset=".6" stop-color="#7a4a22"/><stop offset="1" stop-color="#4f2d12"/></radialGradient>
+<linearGradient id="flameG" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff7b1a"/><stop offset=".45" stop-color="#ffc93c"/><stop offset="1" stop-color="#fff6c8"/></linearGradient>
+<radialGradient id="haloG"><stop offset="0" stop-color="#ffd76a" stop-opacity=".75"/><stop offset="1" stop-color="#ffb02e" stop-opacity="0"/></radialGradient>
+<filter id="raise" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2.4" stdDeviation="2" flood-color="#2a0308" flood-opacity=".5"/></filter>
+<g id="mgO"><circle r="6" fill="url(#mgOg)"/><circle r="6" fill="none" stroke="#c4560c" stroke-width="1.4" stroke-dasharray="1.6 1.3"/><circle r="3.4" fill="none" stroke="#e07a12" stroke-width="1" stroke-dasharray="1.2 1"/><circle r="1.4" fill="#a8420a"/></g>
+<g id="mgY"><circle r="6" fill="url(#mgYg)"/><circle r="6" fill="none" stroke="#c98a0c" stroke-width="1.4" stroke-dasharray="1.6 1.3"/><circle r="3.4" fill="none" stroke="#e2a516" stroke-width="1" stroke-dasharray="1.2 1"/><circle r="1.4" fill="#b07a08"/></g>
+<g id="mgR"><circle r="6" fill="url(#mgRg)"/><circle r="6" fill="none" stroke="#7a0616" stroke-width="1.4" stroke-dasharray="1.6 1.3"/><circle r="3.4" fill="none" stroke="#b01226" stroke-width="1" stroke-dasharray="1.2 1"/><circle r="1.5" fill="#f6c445"/></g>
+<g id="mango"><path d="M0 0C6 8 6.5 22 0 32-6.5 22-6 8 0 0Z" fill="url(#leafG)" stroke="#1b4a1d" stroke-width=".7"/><path d="M0 3V29" stroke="#b8e09a" stroke-opacity=".55" stroke-width=".8"/></g>
+<g id="mango2"><path d="M0 0C6 8 6.5 22 0 32-6.5 22-6 8 0 0Z" fill="url(#leafG2)" stroke="#1b4a1d" stroke-width=".7"/><path d="M0 3V29" stroke="#d6f0b4" stroke-opacity=".55" stroke-width=".8"/></g>
+<g id="bell"><path d="M0-7v5" stroke="#b68427" stroke-width="1.4"/><path d="M-7 10C-7 3-4-2 0-2S7 3 7 10Z" fill="url(#goldG)" stroke="#8a5a12" stroke-width=".8"/><path d="M-8.5 10h17" stroke="#8a5a12" stroke-width="1.6" stroke-linecap="round"/><circle cy="12.6" r="2" fill="#b68427"/></g>
+<g id="diya"><ellipse cy="-10" rx="18" ry="16" fill="url(#haloG)"/><path d="M-13-1C-10 7 10 7 13-1L9-3C4-1-4-1-9-3Z" fill="#b5541c" stroke="#6b2a0c" stroke-width=".8"/><path d="M-12 0C-9 6 9 6 12 0" fill="none" stroke="#f6c445" stroke-width="1.3" stroke-dasharray="1.6 2"/><ellipse cy="-2.4" rx="9" ry="1.6" fill="#5a2208"/></g>
+<path id="flame" d="M0 0C-4.5-5-3.5-12 0-20 3.5-12 4.5-5 0 0Z" fill="url(#flameG)"/>
 </defs>
-<rect width="600" height="1000" fill="url(#cardG)"/><rect width="600" height="1000" fill="url(#linen)"/>
-<path d="M44 140V990M556 140V990" ${STITCH}/>
-<g filter="url(#raise)"><path d="M150 930V860M450 930V860" stroke="none"/>
-<path d="M138 930C126 860 128 800 140 760 152 800 154 860 142 930Z" fill="#5b6848"/><path d="M462 930C450 860 452 800 464 760 476 800 474 860 458 930Z" fill="#5b6848"/></g>
+<rect width="600" height="1000" fill="url(#bgG)"/><rect width="600" height="1000" fill="url(#buti)"/>
+<g transform="translate(300 390)" fill="none" stroke="#f0c45a" stroke-opacity=".2" stroke-width="1"><circle r="120"/><circle r="152"/><circle r="182"/><g fill="#f0c45a" fill-opacity=".05">${petals(16, 62, 120, 15)}${petals(24, 122, 180, 12)}</g><g fill="#f0c45a" fill-opacity=".35" stroke="none">${dots}</g></g>
+<path d="M40 190V978M560 190V978M48 190V978M552 190V978" stroke="#e0b04a" stroke-opacity=".35" stroke-width="1"/>
+<circle cx="300" cy="760" r="270" fill="url(#glowG)"/>
+${sparkles}
+${shikhara(232, 802, 64, 86)}${shikhara(368, 802, 64, 86)}${shikhara(300, 790, 150, 168, true)}
+<g filter="url(#raise)"><circle cx="300" cy="716" r="17" fill="#b3122a" stroke="url(#goldG)" stroke-width="2.4"/><text x="300" y="724.5" text-anchor="middle" font-family="'Tiro Devanagari Hindi', 'Kohinoor Devanagari', 'Noto Serif Devanagari', serif" font-size="22" fill="#ffd77a">ॐ</text></g>
 <g filter="url(#raise)">
-<path d="M300 612v-20" stroke="#a97f3c" stroke-width="2.4"/><circle cx="300" cy="588" r="4" fill="#a97f3c"/>
-<path d="M248 690C244 650 270 628 300 612 330 628 356 650 352 690Z" fill="url(#stoneG)" stroke="#c7b3a2" stroke-width="1.2"/>
-${[262, 281, 300, 319, 338].map((x) => `<path d="M${x} 690Q${x + (300 - x) * 0.4} 640 300 614" fill="none" stroke="#c7b3a2" stroke-opacity=".6" stroke-width=".8"/>`).join('')}
-<rect x="240" y="688" width="120" height="10" fill="url(#stoneG)" stroke="#c7b3a2" stroke-width="1"/>
-${merlons}
-<rect x="160" y="704" width="280" height="226" fill="url(#stoneG)" stroke="#c7b3a2" stroke-width="1.2"/>
-<path d="M160 716H440M160 920H440" ${STITCH}/>
-<path d="${arch}" fill="url(#alcoveG)"/><path d="${arch}" fill="url(#jaali)"/>
-<path d="${arch}" fill="none" stroke="#a97f3c" stroke-width="5"/><path d="${arch}" fill="none" stroke="#fbf6f0" stroke-width="2.2"/>
-<path d="M286 930V860A14 14 0 0 1 314 860V930Z" fill="#93626a"/>
-${win(196)}${win(404)}
+<path d="M252 778H348L338 766H262Z" fill="url(#stoneG)" stroke="#7a3a0c" stroke-width=".8"/><ellipse cx="300" cy="765" rx="18" ry="4.5" fill="url(#goldG)"/><circle cx="300" cy="757" r="5" fill="url(#goldG)" stroke="#7a3a0c" stroke-width=".6"/>
+<path d="M238 790H362L350 778H250Z" fill="url(#stoneG)" stroke="#7a3a0c" stroke-width=".8"/>
+<path d="M222 804H378L364 790H236Z" fill="url(#stoneG)" stroke="#7a3a0c" stroke-width=".8"/>
+<path d="M222 805H378" stroke="#b3122a" stroke-width="3.4"/><path d="M222 808.5H378" stroke="#f6c445" stroke-width="1.2" stroke-dasharray="3 2"/>
+<rect x="232" y="810" width="136" height="90" fill="url(#stoneG)" stroke="#7a3a0c" stroke-width="1"/>
+${pillars}
+<rect x="279" y="824" width="42" height="76" fill="#b3122a" stroke="url(#goldG)" stroke-width="2"/>
+<rect x="285" y="832" width="30" height="68" fill="url(#doorG)"/>
+<use href="#diya" transform="translate(300 896) scale(.6)"/><g transform="translate(300 893) scale(.6)"><use class="flame" href="#flame"/></g>
+${doorToran}
+<rect x="206" y="900" width="188" height="14" fill="url(#stoneG)" stroke="#7a3a0c" stroke-width=".8"/><path d="M206 906H394" stroke="#b3122a" stroke-width="3"/>
+<rect x="190" y="914" width="220" height="12" fill="url(#stoneG)" stroke="#7a3a0c" stroke-width=".8"/>
+<rect x="174" y="926" width="252" height="12" fill="url(#stoneG)" stroke="#7a3a0c" stroke-width=".8"/>
 </g>
-${chhatri(172, 706, 46)}${chhatri(428, 706, 46)}
-${chhatri(96, 936, 78)}${chhatri(504, 936, 78)}
-<g>${wisteria(168, 714, 70)}${wisteria(182, 716, 52)}${wisteria(196, 712, 62)}${wisteria(432, 712, 58)}${wisteria(418, 716, 44)}</g>
-<g filter="url(#raise)"><path d="M118 936C112 904 150 896 170 904 186 894 222 900 226 936Z" fill="#6b7757"/><path d="M374 936C378 900 414 894 430 904 450 896 488 904 482 936Z" fill="#6b7757"/>
-<ellipse cx="300" cy="944" rx="62" ry="13" fill="url(#stoneG)" stroke="#c7b3a2" stroke-width="1.2"/><ellipse cx="300" cy="941" rx="50" ry="8" fill="#cfdadb"/>
-<path d="M300 938V902M300 904q-14 4 -20 30M300 904q14 4 20 30" fill="none" stroke="#b9c9cc" stroke-width="1.6"/><circle cx="300" cy="900" r="3" fill="#a97f3c"/></g>
-${drape()}<g transform="translate(600 0) scale(-1 1)">${drape()}</g>
-${swags()}
-<g>${wisteria(200, 40, 96)}${wisteria(188, 44, 70)}${wisteria(212, 44, 76)}${wisteria(400, 40, 96)}${wisteria(388, 44, 74)}${wisteria(412, 44, 70)}${wisteria(84, 40, 56)}${wisteria(516, 40, 56)}</g>
-<g filter="url(#raise)">${roses}</g>
-${lace(992, true)}${lace(8, false)}
+<g filter="url(#raise)">${heap(196, 924)}${heap(404, 924, -1)}</g>
+${kalash(128, 944, 1.15)}${kalash(472, 944, 1.15)}
+${rangoli}
+${diyas}
+<path d="M0 986H600" stroke="url(#goldG)" stroke-width="2"/><rect y="988" width="600" height="12" fill="#4a0812"/>
+<g filter="url(#raise)"><rect width="600" height="18" fill="url(#goldG)"/><path d="M0 18H600" stroke="#8a5a12" stroke-width="1.2"/><path d="M0 9H600" stroke="#b3122a" stroke-width="3" stroke-dasharray="10 6"/>${leaves}${swags}</g>
+${ladi(150, 26, 150)}${ladi(300, 26, 104)}${ladi(450, 26, 150)}
+${ladi(84, 26, 560, 0.9)}${ladi(516, 26, 560, 0.9)}
 </svg>`;
 }
 
@@ -205,9 +226,24 @@ function envelope(): string {
 </div>`;
 }
 
-/* ---------- page 1: cover ---------- */
+/* ---------- page 1: Shri Ganesha with the shlokas (same artwork & shlokas as the wedding invite) ---------- */
+function opening(): string {
+  return `<header class="opening" id="top">
+  <figure class="opening__art">
+    <img class="opening__img" src="images/ganesh-640.webp" srcset="images/ganesh-640.webp 640w, images/ganesh.webp 1024w" sizes="(min-width: 700px) 480px, 92vw" width="640" height="960" alt="Shri Ganesha seated on a golden throne amid flowers and lamps" fetchpriority="high">
+    <p class="opening__invocation" lang="sa">॥ श्री गणेशाय नमः ॥</p>
+    <figcaption class="opening__shloka" lang="sa">
+      <span>वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः ।<br>निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥</span>
+      <span>गुरुर्ब्रह्मा गुरुर्विष्णुः गुरुर्देवो महेश्वरः ।<br>गुरुः साक्षात् परब्रह्म तस्मै श्रीगुरवे नमः ॥</span>
+    </figcaption>
+  </figure>
+  <a class="opening__cue" href="#cover"><span>Scroll</span><i aria-hidden="true"></i></a>
+</header>`;
+}
+
+/* ---------- page 2: cover ---------- */
 function cover(): string {
-  return `<header class="cover" id="top">
+  return `<section class="cover" id="cover">
   <div class="cover__scene">
     ${coverScene()}
     <div class="cover__panel">
@@ -219,10 +255,10 @@ function cover(): string {
     </div>
   </div>
   <a class="cover__cue" href="#details"><span>Scroll</span><i aria-hidden="true"></i></a>
-</header>`;
+</section>`;
 }
 
-/* ---------- page 2: details ---------- */
+/* ---------- page 3: details ---------- */
 function details(): string {
   const e = C.event;
   const h = C.host;
@@ -266,7 +302,7 @@ function details(): string {
 </section>`;
 }
 
-/* ---------- page 3: RSVP + closing ---------- */
+/* ---------- page 4: RSVP + closing ---------- */
 function rsvp(): string {
   const r = C.rsvp;
   const msg = r.whatsappMessage ? `?text=${encodeURIComponent(r.whatsappMessage)}` : '';
@@ -308,6 +344,7 @@ export function renderBody(): string {
     '<div class="page-border page-border--l" aria-hidden="true"></div><div class="page-border page-border--r" aria-hidden="true"></div>',
     envelope(),
     '<main id="invitation">',
+    opening(),
     cover(),
     details(),
     rsvp(),

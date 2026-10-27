@@ -61,6 +61,6 @@ export const config = {
   share: {
     title: 'Pranshu & Nishtha · Engagement · 6 December 2026',
     description: 'You are invited to the engagement of Pranshu & Nishtha — Sunday, 6th December 2026, 11 AM to 5 PM, Royal Pepper Resorts.',
-    themeColor: '#e4c3bb',
+    themeColor: '#6a0e1e',
   },
 };
